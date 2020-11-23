@@ -1,0 +1,40 @@
+<resources>
+<string-array name="calculationMethods">
+    <item>@string/muslim_world_league</item>
+    <item>@string/egypt</item>
+    <item>@string/karachi</item>
+    <item>@string/makkah</item>
+    <item>@string/dubai</item>
+    <item>@string/qatar</item>
+    <item>@string/moonsighting</item>
+    <item>@string/singapore</item>
+    <item>@string/north_america</item>
+</string-array>
+<string-array name="calculationMethodValues">
+    <item>muslim_world_league</item>
+    <item>egypt</item>
+    <item>karachi</item>
+    <item>makkah</item>
+    <item>dubai</item>
+    <item>qatar</item>
+    <item>moonsighting</item>
+    <item>singapore</item>
+    <item>north_america</item>
+</string-array>
+<string-array name="madaahib">
+    <item>@string/shafi</item>
+    <item>@string/hanafi</item>
+</string-array>
+<string-array name="madaahibValues">
+    <item>shafi</item>
+    <item>hanafi</item>
+</string-array>
+<string-array name="timeFormats">
+    <item>@string/military_time</item>
+    <item>@string/am_pm_time</item>
+</string-array>
+<string-array name="timeFormatValues">
+    <item>24_hour_time</item>
+    <item>12_hour_time</item>
+</string-array>
+</resources>

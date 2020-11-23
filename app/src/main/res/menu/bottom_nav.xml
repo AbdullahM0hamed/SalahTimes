@@ -1,0 +1,13 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/prayer_timings"
+        android:title="@string/salah_times"
+        android:icon="@drawable/ic_clock_white_24dp" />
+
+    <item android:id="@+id/qiblah"
+        android:title="@string/qiblah_string"
+        android:icon="@drawable/ic_compass_white_24dp" />
+
+    <item android:id="@+id/settings"
+        android:title="@string/settings_string"
+        android:icon="@drawable/ic_settings_white_24dp" />
+</menu>

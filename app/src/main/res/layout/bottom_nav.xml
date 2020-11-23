@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" 
+    android:background="#ffffff" 
+	android:layout_width="match_parent"
+	android:layout_height="56dp"
+	android:layout_alignParentBottom="true">
+
+	<RelativeLayout
+        android:id="@+id/salah_time"
+        android:background="?attr/selectableItemBackground"
+		android:orientation="horizontal"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:layout_weight="0.5">
+
+
+		<ImageView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_centerHorizontal="true"
+			android:layout_marginTop="10dp"
+			android:background="#00000000"
+			android:src="@drawable/ic_clock_white_24dp"
+			android:id="@+id/timingNavIcon"/>
+
+
+            <TextView
+                android:id="@+id/timingNavText"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/salah_times"
+				android:layout_below="@id/timingNavIcon"
+				android:layout_centerHorizontal="true"/>
+
+
+		</RelativeLayout>
+
+
+		<RelativeLayout
+            android:id="@+id/qiblah_compass"
+            android:background="?attr/selectableItemBackground"
+			android:orientation="horizontal"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:layout_weight="0.5">
+
+
+			<ImageView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_centerHorizontal="true"
+				android:layout_marginTop="10dp"
+				android:background="#00000000"
+				android:src="@drawable/ic_compass_white_24dp"
+				android:id="@+id/qiblahNavIcon"/>
+
+
+            <TextView
+                android:id="@+id/qiblahNavText"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/qiblah_string"
+				android:layout_below="@id/qiblahNavIcon"
+				android:layout_centerHorizontal="true"/>
+
+
+		</RelativeLayout>
+
+
+		<RelativeLayout
+            android:id="@+id/settings"
+            android:background="?attr/selectableItemBackground"
+			android:orientation="horizontal"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:layout_weight="0.5">
+
+
+			<ImageView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_centerHorizontal="true"
+				android:layout_marginTop="10dp"
+				android:background="#00000000"
+				android:src="@drawable/ic_settings_white_24dp"
+				android:id="@+id/settingsNavIcon"/>
+
+
+            <TextView
+                android:id="@+id/settingsNavText"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/settings_string"
+				android:layout_below="@id/settingsNavIcon"
+				android:layout_centerHorizontal="true"/>
+
+
+		</RelativeLayout>
+
+
+	</LinearLayout>

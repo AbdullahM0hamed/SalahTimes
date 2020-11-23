@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen 
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <ListPreference
+        android:title="@string/calculation_method"
+        android:summary="@string/calculation_summary"
+        android:key="calculation_method"
+        android:defaultValue="muslim_world_league"
+        android:entries="@array/calculationMethods"
+        android:entryValues="@array/calculationMethodValues" />
+
+    <ListPreference
+        android:title="@string/madhab"
+        android:summary="@string/madhab_summary"
+        android:key="madhab"
+        android:defaultValue="shafi"
+        android:entries="@array/madaahib"
+        android:entryValues="@array/madaahibValues" />
+
+    <ListPreference
+        android:title="@string/time_format"
+        android:summary="@string/time_format_summary"
+        android:key="time_format"
+        android:defaultValue="24_hour_time"
+        android:entries="@array/timeFormats"
+        android:entryValues="@array/timeFormatValues" />
+</PreferenceScreen>

@@ -358,8 +358,8 @@ public class MainActivity extends AppCompatActivity implements LocationListener
 			if (nextPrayer.name() == "SUNRISE")
 				//Gets the prayer following sunrise, thus effectively skipping sunrise as next prayer
 				nextPrayerTime = times.timeForPrayer(times.nextPrayer(times.sunrise));
-
-			next.setText("Next Prayer: " + formatter.format(nextPrayerTime));
+			
+			next.setText(getResources().getString(R.string.next_prayer, formatter.format(nextPrayerTime)));
 
 		}
 		catch (NullPointerException e)

@@ -354,7 +354,11 @@ public class MainActivity extends AppCompatActivity implements LocationListener
 		//If 'Isha has already come, getting the next Prayer's time throws a NullPointerException
 		try 
 		{
-			Date nextPrayerTime = times.timeForPrayer(nextPrayer);
+			Date nextPrayerTime = times.timeForPrayer(nextPrayer); 
+			if (nextPrayer.name() == "SUNRISE")
+				//Gets the prayer following sunrise, thus effectively skipping sunrise as next prayer
+				nextPrayerTime = times.timeForPrayer(times.nextPrayer(times.sunrise));
+
 			next.setText("Next Prayer: " + formatter.format(nextPrayerTime));
 
 		}

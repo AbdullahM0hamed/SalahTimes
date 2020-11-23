@@ -31,4 +31,5 @@
     <string name="time_format_summary">Select the format with which to display prayer times</string>
     <string name="prayer_heading">Prayer</string>
     <string name="start_heading">Start</string>
+    <string name="next_prayer">Next Prayer: %1$s</string>
 </resources>

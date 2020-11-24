@@ -31,60 +31,20 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
-import android.widget.*;
 
 public class MainActivity extends AppCompatActivity implements LocationListener
 {
-	private Location location;
-	private Calendar currentCal = Calendar.getInstance(Locale.getDefault());
-	private TextView hijriDateView;
-	private TextView dateView;
-	private long latitude = 360;
-	private long longitude = 360;
-
-	void setLocation(Location loc)
-	{
-		this.location = loc;
-	}
-
-	@Override
-	public void onLocationChanged(Location p1)
-	{
-		setLocation(p1);
-		latitude = (long) p1.getLatitude();
-		longitude = (long) p1.getLongitude();
-
-		SharedPreferences.Editor editor = getSharedPreferences("location", 0).edit();
-		editor.putLong("latitude", latitude);
-		editor.putLong("longitude", longitude);
-		editor.apply();
-
-		setPrayerTimes(latitude, longitude);
-	}
-
-	@Override
-	public void onStatusChanged(String p1, int p2, Bundle p3)
-	{
-		// TODO: Implement this method
-	}
-
-	@Override
-	public void onProviderEnabled(String p1)
-	{
-		// TODO: Implement this method
-	}
-
-	@Override
-	public void onProviderDisabled(String p1)
-	{
-		// TODO: Implement this method
-	}
+	private Location mLocation;
+	private Calendar mCurrentCal = Calendar.getInstance(Locale.getDefault());
+	private TextView mHijriDateView;
+	private TextView mDateView;
+	private long mLatitude;
+	private long mLongitude;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-
 		OnClickListener listenerLeft = new OnClickListener()
 		{
 			@Override
@@ -111,78 +71,112 @@ public class MainActivity extends AppCompatActivity implements LocationListener
 		subtractDate.setOnClickListener(listenerLeft);
 		addDate.setOnClickListener(listenerRight);
 
-		hijriDateView = findViewById(R.id.hijriDate);
-		hijriDateView.setText(getHijriDate());
+		mHijriDateView = findViewById(R.id.hijriDate);
+		mHijriDateView.setText(getHijriDate());
 
-		dateView = findViewById(R.id.date);
-		dateView.setText(getDate());
+		mDateView = findViewById(R.id.date);
+		mDateView.setText(getDate());
 
-		try
-		{
-			setupNavigation();
-		}
-		catch (Exception e)
-		{
-			Toast.makeText(this, e.toString(), 5).show();
-		}
+		setupNavigation();
 
         SharedPreferences prefs = this.getSharedPreferences("location", 0);
-        longitude = prefs.getLong("longitude", 360);
-        latitude = prefs.getLong("latitude", 360);
+        mLongitude = prefs.getLong("longitude", 360);
+        mLatitude = prefs.getLong("latitude", 360);
 
         //Valid latitudes are between -90 and 90, and valid longitudes are between -180 and 180
-        if (longitude == 360 || latitude == 360) 
+        if (mLongitude == 360 || mLatitude == 360) 
         {
 			checkPermissionAndGetLocation();
 		}
 		else
 		{
-			setPrayerTimes(latitude, longitude);
+			setPrayerTimes(mLatitude, mLongitude);
 		}
     }
 
-	void enableLocation()
+	/*
+	 * startActivityForResult is only used to redirect user to
+	 * location settings, therefore this method attempts to get
+	 * location
+	 */
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data)
 	{
-		Intent enableLocationIntent = new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-		startActivityForResult(enableLocationIntent, 0);
-	}
-
-	void changeScreen(String screen)
-	{
-		ImageView timingIcon = findViewById(R.id.timingNavIcon);
-		ImageView qiblahIcon = findViewById(R.id.qiblahNavIcon);
-
-		timingIcon.clearColorFilter();
-		qiblahIcon.clearColorFilter();
-
-		TextView timingText = findViewById(R.id.timingNavText);
-		TextView qiblahText = findViewById(R.id.qiblahNavText);
-
-		int defaultColor = Color.parseColor("#757575");
-
-		timingText.setTextColor(defaultColor);
-		qiblahText.setTextColor(defaultColor);
-
-		int selectedColor = Color.parseColor("#2d3e50");
-
-		switch (screen)
+		super.onActivityResult(requestCode, resultCode, data);
+		try
 		{
-			case "salah_timings":
-				timingIcon.setColorFilter(selectedColor);
-				timingText.setTextColor(selectedColor);
-				if (latitude != 360 && longitude != 360)
-					setPrayerTimes(latitude, longitude);
-				break;
-			case "qiblah_compass":
-				qiblahIcon.setColorFilter(selectedColor);
-				qiblahText.setTextColor(selectedColor);
-				break;
-			case "settings":
-				getFragmentManager().beginTransaction().replace(android.R.id.content, new SettingsFragment()).commit();
-				break;
+			getLocation();
+		}
+		catch (Exception e)
+		{
 		}
 	}
 
+	/*
+	 * Only location permissions are requested, so if permission
+	 * is granted, then we get location - otherwise we ask again
+	 */
+	@Override
+	public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults)
+	{
+		super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+		boolean denied = false;
+
+		if (grantResults[0] == PackageManager.PERMISSION_DENIED) denied = true;
+
+		if (denied)
+		{
+			checkPermissionAndGetLocation();
+		}
+		else
+		{
+			getLocation();
+		}
+	}
+
+	/*
+	 * Stores new coordinates when location data is received
+	 * in SharedPreferences and sets prayer times based on
+	 * the new coordinates. Ideally, this could be registered
+	 * and unregistered in onResume and onPause respectively
+	 * so the app wouldn't always be listening for location
+	 * info
+	 */
+	@Override
+	public void onLocationChanged(Location p1)
+	{
+		setLocation(p1);
+		mLatitude = (long) p1.getLatitude();
+		mLongitude = (long) p1.getLongitude();
+
+		SharedPreferences.Editor editor = getSharedPreferences("location", 0).edit();
+		editor.putLong("latitude", mLatitude);
+		editor.putLong("longitude", mLongitude);
+		editor.apply();
+
+		setPrayerTimes(mLatitude, mLongitude);
+	}
+
+	@Override
+	public void onStatusChanged(String p1, int p2, Bundle p3) {}
+
+	@Override
+	public void onProviderEnabled(String p1) {}
+
+	@Override
+	public void onProviderDisabled(String p1) {}
+
+	void setLocation(Location loc)
+	{
+		this.mLocation = loc;
+	}
+
+	/*
+	 * Sets the onclick listeners on the bottom nav bar
+	 * as well as calling change_screen with the parameter
+	 * 'salah_timings', which results in the initial setting
+	 * of prayer timings
+	 */
 	void setupNavigation()
 	{
 		changeScreen("salah_timings");
@@ -224,35 +218,82 @@ public class MainActivity extends AppCompatActivity implements LocationListener
 		settings.setOnClickListener(navigateToSettingsListener);
 	}
 
-	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data)
+	/*
+	 * Redirects user to location settings
+	 */
+	void enableLocation()
 	{
-		super.onActivityResult(requestCode, resultCode, data);
-		try
+		Intent enableLocationIntent = new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+		startActivityForResult(enableLocationIntent, 0);
+	}
+
+	/*
+	 * This method is responsible for changing
+	 * between screens when user clicks 
+	 * a button on the bottom nav bar
+	 */
+	void changeScreen(String screen)
+	{
+		ImageView timingIcon = findViewById(R.id.timingNavIcon);
+		ImageView qiblahIcon = findViewById(R.id.qiblahNavIcon);
+
+		timingIcon.clearColorFilter();
+		qiblahIcon.clearColorFilter();
+
+		TextView timingText = findViewById(R.id.timingNavText);
+		TextView qiblahText = findViewById(R.id.qiblahNavText);
+
+		int defaultColor = Color.parseColor("#757575");
+
+		timingText.setTextColor(defaultColor);
+		qiblahText.setTextColor(defaultColor);
+
+		int selectedColor = Color.parseColor("#2d3e50");
+
+		switch (screen)
 		{
-			getLocation();
-		}
-		catch (Exception e)
-		{
+			case "salah_timings":
+				timingIcon.setColorFilter(selectedColor);
+				timingText.setTextColor(selectedColor);
+				if (mLatitude != 360 && mLongitude != 360) setPrayerTimes(mLatitude, mLongitude);
+				break;
+			case "qiblah_compass":
+				qiblahIcon.setColorFilter(selectedColor);
+				qiblahText.setTextColor(selectedColor);
+				break;
+			case "settings":
+				getFragmentManager().beginTransaction().replace(android.R.id.content, new SettingsFragment()).commit();
+				break;
 		}
 	}
 
+	/*
+	 * Method for changing the Hijri and Gregorian dates
+	 * displayed in the app.
+	 */
 	void addToDate(int days)
 	{
-		currentCal.add(Calendar.DATE, days);
-		setPrayerTimes(latitude, longitude);
-		hijriDateView.setText(getHijriDate());
-		dateView.setText(getDate());
+		mCurrentCal.add(Calendar.DATE, days);
+		setPrayerTimes(mLatitude, mLongitude);
+		mHijriDateView.setText(getHijriDate());
+		mDateView.setText(getDate());
 	}
 
+	/*
+	 * Get currently selected Gregorian date as Day, day_of_month month year
+	 * e.g: Tuesday, 24th November 2020
+	 */
 	String getDate()
 	{
-		SimpleDateFormat sFormat = new SimpleDateFormat();
-		sFormat.applyPattern("EEEE, dd MMMM yyyy");
+		SimpleDateFormat sFormat = new SimpleDateFormat("EEEE, dd MMMM yyyy");
 
-		return sFormat.format(currentCal.getTime());
+		return sFormat.format(mCurrentCal.getTime());
 	}
 
+	/*
+	 * Get currently selected Hijri date, formatted in the
+	 * same way as getDate()
+	 */
 	String getHijriDate()
 	{
 		UmmalquraCalendar calendar = new UmmalquraCalendar();
@@ -264,43 +305,29 @@ public class MainActivity extends AppCompatActivity implements LocationListener
 		SimpleDateFormat formatter = new SimpleDateFormat("EEEE, dd MMMM yyyy");
 		formatter.setCalendar(calendar);
 
-		return formatter.format(currentCal.getTime());
+		return formatter.format(mCurrentCal.getTime());
 	}
 
+	/*
+	 * If location permissions are available, location is requested,
+	 * otherwise location permissions are requested
+	 */
 	void checkPermissionAndGetLocation()
 	{
 		String permission = "android.permission.ACCESS_FINE_LOCATION";
 
-		if (Build.VERSION.SDK_INT < 23 || checkSelfPermission(permission) != -1)
-			getLocation();
+		if (Build.VERSION.SDK_INT < 23 || checkSelfPermission(permission) != -1) getLocation();
 
 		requestPermissions(new String[] {permission}, 123);
 	}
 
-	@Override
-	public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults)
-	{
-		super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-		boolean denied = false;
-
-		for (int result : grantResults)
-		{
-			if (result == PackageManager.PERMISSION_DENIED)
-			{
-				denied = true;
-			}
-		}
-
-		if (denied)
-		{
-			checkPermissionAndGetLocation();
-		}
-		else
-		{
-			getLocation();
-		}
-	}
-
+	/*
+	 * This method is used to get location. When a cached location
+	 * is available, as provided by LocationManager.getLastKnownLocation
+	 * then that is passed on to the onLocationChanged method,
+	 * otherwise locationUpdates are requested - which trigger
+	 * onLocationChanged
+	 */
 	void getLocation()
 	{
 		LocationManager manager = (LocationManager) getSystemService(LOCATION_SERVICE);
@@ -313,22 +340,30 @@ public class MainActivity extends AppCompatActivity implements LocationListener
 		}
 		else
 		{
-			location = manager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-			if (location == null)
+			mLocation = manager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+			if (mLocation == null)
 			{
 				manager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, this);
 			}
 			else
 			{
-				onLocationChanged(location);
+				onLocationChanged(mLocation);
 			}
 		}
 	}
 
+	/*
+	 * This method loops through the TextViews that display prayer 
+	 * times, and sets the prayer times based on the received
+	 * latitude and longitude parameters - as well as the stored
+	 * calculation method and madhab in shared preferences.
+	 * The default calculation method is MUSLIM_WORLD_LEAGUE, and
+	 * the default madhab is Shafi'i
+	 */
 	void setPrayerTimes(double latitude, double longitude)
 	{
 		Coordinates coordinates = new Coordinates(latitude, longitude);
-		DateComponents date = DateComponents.from(currentCal.getTime());
+		DateComponents date = DateComponents.from(mCurrentCal.getTime());
 		CalculationParameters params = getCalculationParameters();
 		params.madhab = getMadhab();
 
@@ -368,11 +403,15 @@ public class MainActivity extends AppCompatActivity implements LocationListener
 			calendar.add(Calendar.DATE, 1);
 			Date tomorrow = calendar.getTime();
 			PrayerTimes tomorrowTimes = new PrayerTimes(coordinates, DateComponents.from(tomorrow), params);
-			next.setText("Next Prayer: " + formatter.format(tomorrowTimes.fajr));
+			next.setText(getResources().getString(R.string.next_prayer, formatter.format(tomorrowTimes.fajr)));
 		}
 
 	}
 
+	/*
+	 * Returns parameters for the chosen calculation method
+	 * in shared preferences. Default is muslim_world_league
+	 */
 	CalculationParameters getCalculationParameters()
 	{
 		SharedPreferences prefs = getSharedPreferences(getPackageName() + "_preferences", MODE_PRIVATE);
@@ -416,6 +455,9 @@ public class MainActivity extends AppCompatActivity implements LocationListener
 		return params;
 	}
 
+	/*
+	 * Gets madhab based on shared preferences. Default is shafi
+	 */
 	Madhab getMadhab()
 	{
 		SharedPreferences prefs = getSharedPreferences(getPackageName() + "_preferences", MODE_PRIVATE);
@@ -435,6 +477,10 @@ public class MainActivity extends AppCompatActivity implements LocationListener
 		return chosenMadhab;
 	}
 
+	/*
+	 * Returns string format for displaying time in the preferred
+	 * way for the user. The default format is 24 hours
+	 */
 	String getTimeFormat()
 	{
 		SharedPreferences prefs = getSharedPreferences(getPackageName() + "_preferences", MODE_PRIVATE);

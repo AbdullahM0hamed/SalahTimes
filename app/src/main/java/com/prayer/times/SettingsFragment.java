@@ -12,6 +12,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 
+/*
+ * This class allows the user to configure
+ * preferences, such as calculation method
+ * etc. This class does not contain code for
+ * getting or setting shared preferencses
+ * values, that is done via PreferenceScreen
+ * See: res/xml/preferences.xml
+ */
 public class SettingsFragment extends PreferenceFragment
 {
 	@Override
@@ -21,6 +29,12 @@ public class SettingsFragment extends PreferenceFragment
 		addPreferencesFromResource(R.xml.preferences);
 	}
 
+	/*
+	 * This method is overriden in order
+	 * to allow us to set onClickListeners
+	 * on a custom layout, to allow for
+	 * bottom bar navigation.
+	 */
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 	{

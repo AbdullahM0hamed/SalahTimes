@@ -32,14 +32,18 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 
+
 public class MainActivity extends AppCompatActivity implements LocationListener
 {
 	private Location mLocation;
 	private Calendar mCurrentCal = Calendar.getInstance(Locale.getDefault());
 	private TextView mHijriDateView;
 	private TextView mDateView;
-	private long mLatitude;
+	private long mLatitude; 
 	private long mLongitude;
+	private SharedPreferences mPreferences;
+	private final static String LATITUDE = "PREF_LATITUDE";
+	private final static String LONGITUDE = "PREF_LONGITUDE";
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -73,15 +77,14 @@ public class MainActivity extends AppCompatActivity implements LocationListener
 
 		mHijriDateView = findViewById(R.id.hijriDate);
 		mHijriDateView.setText(getHijriDate());
-
 		mDateView = findViewById(R.id.date);
 		mDateView.setText(getDate());
+	
+		mPreferences = this.getSharedPreferences(this.getPackageName() + "_preferences", this.MODE_PRIVATE);
+        mLongitude = mPreferences.getLong(LONGITUDE, 360);
+        mLatitude = mPreferences.getLong(LATITUDE, 360);
 
-		setupNavigation();
-
-        SharedPreferences prefs = this.getSharedPreferences("location", 0);
-        mLongitude = prefs.getLong("longitude", 360);
-        mLatitude = prefs.getLong("latitude", 360);
+		setupNavigation();       
 
         //Valid latitudes are between -90 and 90, and valid longitudes are between -180 and 180
         if (mLongitude == 360 || mLatitude == 360) 
@@ -103,13 +106,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener
 	protected void onActivityResult(int requestCode, int resultCode, Intent data)
 	{
 		super.onActivityResult(requestCode, resultCode, data);
-		try
-		{
-			getLocation();
-		}
-		catch (Exception e)
-		{
-		}
+		getLocation();
 	}
 
 	/*
@@ -149,9 +146,9 @@ public class MainActivity extends AppCompatActivity implements LocationListener
 		mLatitude = (long) p1.getLatitude();
 		mLongitude = (long) p1.getLongitude();
 
-		SharedPreferences.Editor editor = getSharedPreferences("location", 0).edit();
-		editor.putLong("latitude", mLatitude);
-		editor.putLong("longitude", mLongitude);
+		SharedPreferences.Editor editor = mPreferences.edit();
+		editor.putLong(LATITUDE, mLatitude);
+		editor.putLong(LONGITUDE, mLongitude);
 		editor.apply();
 
 		setPrayerTimes(mLatitude, mLongitude);
@@ -377,8 +374,8 @@ public class MainActivity extends AppCompatActivity implements LocationListener
 
 		for (int i = 0; i < timeList.length; i++)
 		{
-			TextView t = findViewById(ids[i]);
-			t.setText(formatter.format(timeList[i]));
+			TextView textView = findViewById(ids[i]);
+			textView.setText(formatter.format(timeList[i]));
 		}
 
 		times = new PrayerTimes(coordinates, DateComponents.from(new Date()), params);
@@ -389,10 +386,13 @@ public class MainActivity extends AppCompatActivity implements LocationListener
 		//If 'Isha has already come, getting the next Prayer's time throws a NullPointerException
 		try 
 		{
-			Date nextPrayerTime = times.timeForPrayer(nextPrayer); 
-			if (nextPrayer.name() == "SUNRISE")
-				//Gets the prayer following sunrise, thus effectively skipping sunrise as next prayer
+			Date nextPrayerTime = times.timeForPrayer(nextPrayer);
+		
+			//Gets the prayer following sunrise, thus effectively skipping sunrise as next prayer
+			if (nextPrayer.name() == "SUNRISE") 
+			{
 				nextPrayerTime = times.timeForPrayer(times.nextPrayer(times.sunrise));
+			}
 			
 			next.setText(getResources().getString(R.string.next_prayer, formatter.format(nextPrayerTime)));
 
@@ -414,18 +414,14 @@ public class MainActivity extends AppCompatActivity implements LocationListener
 	 */
 	CalculationParameters getCalculationParameters()
 	{
-		SharedPreferences prefs = getSharedPreferences(getPackageName() + "_preferences", MODE_PRIVATE);
 		String[] calculationMethods = getResources().getStringArray(R.array.calculationMethodValues);
 
-		String calculationMethod = prefs.getString("calculation_method", calculationMethods[0]);
+		String calculationMethod = mPreferences.getString("calculation_method", calculationMethods[0]);
 		int position = Arrays.asList(calculationMethods).indexOf(calculationMethod);
-		CalculationParameters params = null;
+		CalculationParameters params = CalculationMethod.MUSLIM_WORLD_LEAGUE.getParameters();
 
 		switch (position)
 		{
-			default:
-				params = CalculationMethod.MUSLIM_WORLD_LEAGUE.getParameters();
-				break;
 			case 1:
 				params = CalculationMethod.EGYPTIAN.getParameters();
 				break;
@@ -460,8 +456,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener
 	 */
 	Madhab getMadhab()
 	{
-		SharedPreferences prefs = getSharedPreferences(getPackageName() + "_preferences", MODE_PRIVATE);
-		String madhab = prefs.getString("madhab", "shafi");
+		String madhab = mPreferences.getString("madhab", "shafi");
 		Madhab chosenMadhab = null;
 
 		switch (madhab)
@@ -483,8 +478,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener
 	 */
 	String getTimeFormat()
 	{
-		SharedPreferences prefs = getSharedPreferences(getPackageName() + "_preferences", MODE_PRIVATE);
-		String chosen = prefs.getString("time_format", "24_hour_time");
+		String chosen = mPreferences.getString("time_format", "24_hour_time");
 		String format = "HH:mm";
 
 		switch (chosen)

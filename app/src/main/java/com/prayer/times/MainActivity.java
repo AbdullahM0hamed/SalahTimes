@@ -1,11 +1,8 @@
 package com.prayer.times;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.content.res.Resources;
 import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationListener;
@@ -19,16 +16,10 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import com.batoulapps.adhan.CalculationMethod;
-import com.batoulapps.adhan.CalculationParameters;
-import com.batoulapps.adhan.Coordinates;
-import com.batoulapps.adhan.Madhab;
 import com.batoulapps.adhan.PrayerTimes;
 import com.batoulapps.adhan.Prayer;
-import com.batoulapps.adhan.data.DateComponents;
 import com.github.msarhan.ummalqura.calendar.UmmalquraCalendar;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -361,16 +352,10 @@ public class MainActivity extends AppCompatActivity implements LocationListener
 	 */
 	void setPrayerTimes(double latitude, double longitude)
 	{
-		Coordinates coordinates = new Coordinates(latitude, longitude);
-		DateComponents date = DateComponents.from(mCurrentCal.getTime());
-		CalculationParameters params = getCalculationParameters();
-		params.madhab = getMadhab();
-
-		PrayerTimes times = new PrayerTimes(coordinates, date, params);
-
-		SimpleDateFormat formatter = new SimpleDateFormat(getTimeFormat(), Locale.US);
+		SimpleDateFormat formatter = new SimpleDateFormat(CommonCode.getTimeFormat(this), Locale.US);
 		formatter.setTimeZone(TimeZone.getDefault());
-
+	
+		PrayerTimes times = CommonCode.getPrayerTimes(this, mCurrentCal.getTime(), latitude, longitude);
 		int[] ids = new int[] {R.id.fajr_start, R.id.sunrise_start, R.id.dhuhr_start, R.id.asr_start, R.id.maghrib_start, R.id.isha_start};
 		Date[] timeList = new Date[] {times.fajr, times.sunrise, times.dhuhr, times.asr, times.maghrib, times.isha};
 
@@ -380,9 +365,8 @@ public class MainActivity extends AppCompatActivity implements LocationListener
 			textView.setText(formatter.format(timeList[i]));
 		}
 
-		times = new PrayerTimes(coordinates, DateComponents.from(new Date()), params);
+		times = CommonCode.getPrayerTimes(this, new Date(), latitude, longitude);
 		Prayer nextPrayer = times.nextPrayer();
-
 		TextView next = findViewById(R.id.nextPrayer);
 
 		//If 'Isha has already come, getting the next Prayer's time throws a NullPointerException
@@ -395,7 +379,6 @@ public class MainActivity extends AppCompatActivity implements LocationListener
 			{
 				nextPrayerTime = times.timeForPrayer(times.nextPrayer(times.sunrise));
 			}
-			
 			next.setText(getResources().getString(R.string.next_prayer, formatter.format(nextPrayerTime)));
 		}
 		catch (NullPointerException e)
@@ -403,120 +386,9 @@ public class MainActivity extends AppCompatActivity implements LocationListener
 			Calendar calendar = Calendar.getInstance(Locale.getDefault());
 			calendar.add(Calendar.DATE, 1);
 			Date tomorrow = calendar.getTime();
-			PrayerTimes tomorrowTimes = new PrayerTimes(coordinates, DateComponents.from(tomorrow), params);
+			PrayerTimes tomorrowTimes = CommonCode.getPrayerTimes(this, tomorrow, latitude, longitude);
 			next.setText(getResources().getString(R.string.next_prayer, formatter.format(tomorrowTimes.fajr)));
 			timeList = new Date[] {times.fajr, times.sunrise, times.dhuhr, times.asr, times.maghrib, times.isha};
-		}
-		setReminders(timeList);
-	}
-
-	/*
-	 * Returns parameters for the chosen calculation method
-	 * in shared preferences. Default is muslim_world_league
-	 */
-	CalculationParameters getCalculationParameters()
-	{
-		String[] calculationMethods = getResources().getStringArray(R.array.calculationMethodValues);
-
-		String calculationMethod = mPreferences.getString("calculation_method", calculationMethods[0]);
-		int position = Arrays.asList(calculationMethods).indexOf(calculationMethod);
-		CalculationParameters params = CalculationMethod.MUSLIM_WORLD_LEAGUE.getParameters();
-
-		switch (position)
-		{
-			case 1:
-				params = CalculationMethod.EGYPTIAN.getParameters();
-				break;
-			case 2:
-				params = CalculationMethod.KARACHI.getParameters();
-				break;
-			case 3:
-				params = CalculationMethod.UMM_AL_QURA.getParameters();
-				break;
-			case 4:
-				params = CalculationMethod.DUBAI.getParameters();
-				break;
-			case 5:
-				params = CalculationMethod.QATAR.getParameters();
-				break;
-			case 6:
-				params = CalculationMethod.MOON_SIGHTING_COMMITTEE.getParameters();
-				break;
-			case 7:
-				params = CalculationMethod.SINGAPORE.getParameters();
-				break;
-			case 8:
-				params = CalculationMethod.NORTH_AMERICA.getParameters();
-				break;
-		}
-
-		return params;
-	}
-
-	/*
-	 * Gets madhab based on shared preferences. Default is shafi
-	 */
-	Madhab getMadhab()
-	{
-		String madhab = mPreferences.getString("madhab", "shafi");
-		Madhab chosenMadhab = null;
-
-		switch (madhab)
-		{
-			case "shafi":
-				chosenMadhab = Madhab.SHAFI;
-				break;
-			case "hanafi":
-				chosenMadhab = Madhab.HANAFI;
-				break;
-		}
-
-		return chosenMadhab;
-	}
-
-	/*
-	 * Returns string format for displaying time in the preferred
-	 * way for the user. The default format is 24 hours
-	 */
-	String getTimeFormat()
-	{
-		String chosen = mPreferences.getString("time_format", "24_hour_time");
-		String format = "HH:mm";
-
-		switch (chosen)
-		{
-			case "24_hour_time":
-				format = "HH:mm";
-				break;
-			case "12_hour_time":
-				format = "hh:mm a";
-				break;
-		}
-
-		return format;
-	}
-
-	void setReminders(Date[] times)
-	{
-		Intent intent;
-		AlarmManager alarmManager = (AlarmManager) this.getSystemService(this.ALARM_SERVICE);
-		Resources res = getResources();
-		String[] prayerNames = new String[] {
-	            res.getString(R.string.fajr),
-				res.getString(R.string.dhuhr),
-				res.getString(R.string.asr),
-				res.getString(R.string.maghrib),
-				res.getString(R.string.isha)
-				};
-						
-		for (int prayer = 0; prayer < prayerNames.length; prayer++)
-		{
-			intent = new Intent(this, AlarmReceiver.class);
-			intent.putExtra("SALAH_NAME", prayerNames[prayer]);
-			intent.setAction("intent.action.SET_PRAYER_REMINDER");
-			PendingIntent alarmIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
-			
-			alarmManager.set(AlarmManager.RTC_WAKEUP, times[prayer].getTime(), alarmIntent);
 		}
 	}
 }

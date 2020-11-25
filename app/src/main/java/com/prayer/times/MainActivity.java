@@ -1,9 +1,11 @@
 package com.prayer.times;
 
-import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationListener;
@@ -395,7 +397,6 @@ public class MainActivity extends AppCompatActivity implements LocationListener
 			}
 			
 			next.setText(getResources().getString(R.string.next_prayer, formatter.format(nextPrayerTime)));
-
 		}
 		catch (NullPointerException e)
 		{
@@ -404,8 +405,9 @@ public class MainActivity extends AppCompatActivity implements LocationListener
 			Date tomorrow = calendar.getTime();
 			PrayerTimes tomorrowTimes = new PrayerTimes(coordinates, DateComponents.from(tomorrow), params);
 			next.setText(getResources().getString(R.string.next_prayer, formatter.format(tomorrowTimes.fajr)));
+			timeList = new Date[] {times.fajr, times.sunrise, times.dhuhr, times.asr, times.maghrib, times.isha};
 		}
-
+		setReminders(timeList);
 	}
 
 	/*
@@ -492,5 +494,29 @@ public class MainActivity extends AppCompatActivity implements LocationListener
 		}
 
 		return format;
+	}
+
+	void setReminders(Date[] times)
+	{
+		Intent intent;
+		AlarmManager alarmManager = (AlarmManager) this.getSystemService(this.ALARM_SERVICE);
+		Resources res = getResources();
+		String[] prayerNames = new String[] {
+	            res.getString(R.string.fajr),
+				res.getString(R.string.dhuhr),
+				res.getString(R.string.asr),
+				res.getString(R.string.maghrib),
+				res.getString(R.string.isha)
+				};
+						
+		for (int prayer = 0; prayer < prayerNames.length; prayer++)
+		{
+			intent = new Intent(this, AlarmReceiver.class);
+			intent.putExtra("SALAH_NAME", prayerNames[prayer]);
+			intent.setAction("intent.action.SET_PRAYER_REMINDER");
+			PendingIntent alarmIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
+			
+			alarmManager.set(AlarmManager.RTC_WAKEUP, times[prayer].getTime(), alarmIntent);
+		}
 	}
 }

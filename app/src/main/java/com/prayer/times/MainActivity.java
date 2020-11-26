@@ -77,7 +77,8 @@ public class MainActivity extends AppCompatActivity implements LocationListener
         mLongitude = mPreferences.getLong(LONGITUDE, 360);
         mLatitude = mPreferences.getLong(LATITUDE, 360);
 
-		setupNavigation();       
+		CommonCode.setupNavigation(this, findViewById(R.id.rootView));
+		CommonCode.tintViews(getIcon(), getTextView());
 
         //Valid latitudes are between -90 and 90, and valid longitudes are between -180 and 180
         if (mLongitude == 360 || mLatitude == 360) 
@@ -162,50 +163,29 @@ public class MainActivity extends AppCompatActivity implements LocationListener
 	}
 
 	/*
-	 * Sets the onclick listeners on the bottom nav bar
-	 * as well as calling change_screen with the parameter
-	 * 'salah_timings', which results in the initial setting
-	 * of prayer timings
+	 * Gets the bottom nav bar's ImageView for
+	 * for the salah times page, this is used
+	 * by fragment's to tint it to the selected
+	 * color
+	 *
+	 * @return ImageView that contains salah_times icon
 	 */
-	void setupNavigation()
+	ImageView getIcon()
 	{
-		changeScreen("salah_timings");
+		return this.findViewById(R.id.timingNavIcon);
+	}
 
-		OnClickListener navigateToTimingsListener = new OnClickListener()
-		{
-			@Override
-			public void onClick(View view)
-			{
-				changeScreen("salah_timings");
-			}	
-		};
-
-		OnClickListener navigateToQiblahListener = new OnClickListener()
-		{
-			@Override
-			public void onClick(View view)
-			{
-				changeScreen("qiblah_compass");
-			}	
-		};
-
-		OnClickListener navigateToSettingsListener = new OnClickListener()
-		{
-			@Override
-			public void onClick(View view)
-			{
-				changeScreen("settings");
-			}	
-		};
-
-		RelativeLayout salah_times = findViewById(R.id.salah_time);
-		salah_times.setOnClickListener(navigateToTimingsListener);
-
-		RelativeLayout qiblah = findViewById(R.id.qiblah_compass);
-		qiblah.setOnClickListener(navigateToQiblahListener);
-
-		RelativeLayout settings = findViewById(R.id.settings);
-		settings.setOnClickListener(navigateToSettingsListener);
+	/*
+	 * Gets the bottom nav bar's TextView for
+	 * the salah times page, this is used by
+	 * fragments to set its text color to the
+	 * the selected color
+	 *
+	 * @return TextView that contains salah_times text
+	 */
+	TextView getTextView()
+	{
+		return this.findViewById(R.id.timingNavText);
 	}
 
 	/*
@@ -215,46 +195,6 @@ public class MainActivity extends AppCompatActivity implements LocationListener
 	{
 		Intent enableLocationIntent = new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
 		startActivityForResult(enableLocationIntent, 0);
-	}
-
-	/*
-	 * This method is responsible for changing
-	 * between screens when user clicks 
-	 * a button on the bottom nav bar
-	 */
-	void changeScreen(String screen)
-	{
-		ImageView timingIcon = findViewById(R.id.timingNavIcon);
-		ImageView qiblahIcon = findViewById(R.id.qiblahNavIcon);
-
-		timingIcon.clearColorFilter();
-		qiblahIcon.clearColorFilter();
-
-		TextView timingText = findViewById(R.id.timingNavText);
-		TextView qiblahText = findViewById(R.id.qiblahNavText);
-
-		int defaultColor = Color.parseColor("#757575");
-
-		timingText.setTextColor(defaultColor);
-		qiblahText.setTextColor(defaultColor);
-
-		int selectedColor = Color.parseColor("#2d3e50");
-
-		switch (screen)
-		{
-			case "salah_timings":
-				timingIcon.setColorFilter(selectedColor);
-				timingText.setTextColor(selectedColor);
-				if (mLatitude != 360 && mLongitude != 360) setPrayerTimes(mLatitude, mLongitude);
-				break;
-			case "qiblah_compass":
-				qiblahIcon.setColorFilter(selectedColor);
-				qiblahText.setTextColor(selectedColor);
-				break;
-			case "settings":
-				getFragmentManager().beginTransaction().replace(android.R.id.content, new SettingsFragment()).commit();
-				break;
-		}
 	}
 
 	/*

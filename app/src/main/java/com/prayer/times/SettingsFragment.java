@@ -42,61 +42,29 @@ public class SettingsFragment extends PreferenceFragment
 		ImageView settingsIcon = view.findViewById(R.id.settingsNavIcon);
 		TextView settingsText = view.findViewById(R.id.settingsNavText);
 	
-		int color = Color.parseColor("#2d3e50");
-		settingsIcon.setColorFilter(color);
-		settingsText.setTextColor(color);
-		
-		OnClickListener navigateToTimingsListener = new OnClickListener()
-		{
-			@Override
-			public void onClick(View view)
-			{
-				changeScreen("salah_timings", view);
-			}	
-		};
-
-		OnClickListener navigateToQiblahListener = new OnClickListener()
-		{
-			@Override
-			public void onClick(View view)
-			{
-				changeScreen("qiblah_compass", view);
-			}	
-		};
-
-		OnClickListener navigateToSettingsListener = new OnClickListener()
-		{
-			@Override
-			public void onClick(View view)
-			{
-				changeScreen("settings", view);
-			}	
-		};
-	
+	    /*
+		 * Ideally, this would be part of CommonCode.setupNavivation
+		 * but I was unable to get it to work there
+		 */
 		RelativeLayout salah_times = view.findViewById(R.id.salah_time);
-		salah_times.setOnClickListener(navigateToTimingsListener);
+		final PreferenceFragment fragment = this;
+		salah_times.setOnClickListener(new OnClickListener()
+		{
+			@Override
+			public void onClick(View view)
+			{
+				getActivity().getFragmentManager()
+				        .beginTransaction()
+						.remove(fragment)
+						.commit();
+					
+				MainActivity activity = (MainActivity) getActivity();
+				CommonCode.tintViews(activity.getIcon(), activity.getTextView());
+			}
+		});
 
-		RelativeLayout qiblah = view.findViewById(R.id.qiblah_compass);
-		qiblah.setOnClickListener(navigateToQiblahListener);
-
-		RelativeLayout settings = view.findViewById(R.id.settings);
-		settings.setOnClickListener(navigateToSettingsListener);
-	
+		CommonCode.tintViews(settingsIcon, settingsText);
+		CommonCode.setupNavigation(getActivity(), view);	
 		return view;
 	}
-
-	void changeScreen(String screen, View view)
-	{
-
-		switch (screen)
-		{
-			default:
-				((MainActivity) getActivity()).changeScreen(screen);
-				getActivity().getFragmentManager().beginTransaction().remove(this).commit();
-				break;
-			case "settings":
-				break;
-		}
-	}
-	
 }

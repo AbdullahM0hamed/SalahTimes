@@ -1,10 +1,18 @@
 package com.prayer.times;
 
+import android.app.Activity;
 import android.app.AlarmManager;
+import android.app.Fragment;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import com.batoulapps.adhan.Coordinates;
 import com.batoulapps.adhan.CalculationMethod;
 import com.batoulapps.adhan.CalculationParameters;
@@ -14,6 +22,7 @@ import com.batoulapps.adhan.PrayerTimes;
 import com.batoulapps.adhan.data.DateComponents;
 import java.util.Arrays;
 import java.util.Date;
+import android.widget.*;
 
 /*
  * This is a static class which contains
@@ -23,7 +32,9 @@ import java.util.Date;
 class CommonCode
 {
 	private static final String PREF_SALAH = "PREF_SALAH";
-	private static SharedPreferences mPreferences;
+	private static SharedPreferences preferences;
+	private static QiblahFragment qiblahFragment = new QiblahFragment();
+	private static SettingsFragment settingsFragment = new SettingsFragment();
 
 	/*
 	 * Gets the prayer times for a given day
@@ -53,7 +64,7 @@ class CommonCode
 	{
 		String[] calculationMethods = context.getResources().getStringArray(R.array.calculationMethodValues); 
 
-		String calculationMethod = mPreferences.getString("calculation_method", calculationMethods[0]);
+		String calculationMethod = preferences.getString("calculation_method", calculationMethods[0]);
 		int position = Arrays.asList(calculationMethods).indexOf(calculationMethod);
 		CalculationParameters params = CalculationMethod.MUSLIM_WORLD_LEAGUE.getParameters();
 
@@ -95,7 +106,7 @@ class CommonCode
 	 */
 	static Madhab getMadhab()
 	{
-		String madhab = mPreferences.getString("madhab", "shafi");
+		String madhab = preferences.getString("madhab", "shafi");
 		Madhab chosenMadhab = null;
 
 		switch (madhab)
@@ -117,8 +128,8 @@ class CommonCode
 	 */
 	static String getTimeFormat(Context context)
 	{
-		mPreferences = context.getSharedPreferences(context.getPackageName() + "_preferences", context.MODE_PRIVATE);
-		String chosen = mPreferences.getString("time_format", "24_hour_time");
+		preferences = context.getSharedPreferences(context.getPackageName() + "_preferences", context.MODE_PRIVATE);
+		String chosen = preferences.getString("time_format", "24_hour_time");
 		String format = "HH:mm";
 
 		switch (chosen)
@@ -157,5 +168,93 @@ class CommonCode
 			PendingIntent alarmIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
 			alarmManager.set(AlarmManager.RTC_WAKEUP, times.timeForPrayer(salah).getTime(), alarmIntent);
 		}
+	}
+
+	/*
+	 * This method is responsible for changing
+	 * between screens when user clicks 
+	 * a button on the bottom nav bar
+	 */
+	static void changeScreen(Context context, View rootView, String screen)
+	{
+		ImageView timingIcon = rootView.findViewById(R.id.timingNavIcon);
+		ImageView qiblahIcon = rootView.findViewById(R.id.qiblahNavIcon);
+
+		timingIcon.clearColorFilter();
+		qiblahIcon.clearColorFilter();
+
+		TextView timingText = rootView.findViewById(R.id.timingNavText);
+		TextView qiblahText = rootView.findViewById(R.id.qiblahNavText);
+
+		int defaultColor = Color.parseColor("#757575");
+
+		timingText.setTextColor(defaultColor);
+		qiblahText.setTextColor(defaultColor);
+
+		Activity activity = (Activity) context;
+
+		switch (screen)
+		{
+			case "qiblah_compass":
+				activity.getFragmentManager()
+				        .beginTransaction()
+						.replace(android.R.id.content, qiblahFragment)
+						.commit();
+				break;
+			case "settings":
+			   	activity.getFragmentManager()
+				        .beginTransaction()
+						.replace(android.R.id.content, settingsFragment)
+						.commit();
+				break;
+		}
+	}
+
+	/*
+	 * Sets the onclick listeners on the bottom nav bar
+	 * as well as calling change_screen with the parameter
+	 * 'salah_timings', which results in the initial setting
+	 * of prayer timings
+	 */
+	static void setupNavigation(final Context context, final View rootView)
+	{
+		OnClickListener navigateToQiblahListener = new OnClickListener()
+		{
+			@Override
+			public void onClick(View view)
+			{
+				changeScreen(context, rootView, "qiblah_compass");
+			}	
+		};
+
+		OnClickListener navigateToSettingsListener = new OnClickListener()
+		{
+			@Override
+			public void onClick(View view)
+			{
+				changeScreen(context, rootView, "settings");
+			}	
+		};
+
+		RelativeLayout qiblah = rootView.findViewById(R.id.qiblah_compass);
+		qiblah.setOnClickListener(navigateToQiblahListener);
+
+		RelativeLayout settings = rootView.findViewById(R.id.settings);
+		settings.setOnClickListener(navigateToSettingsListener);
+	}
+
+	/*
+	 * This method is used tint the views
+	 * that should appear selected in the
+	 * bottom navigation bar
+	 *
+	 * @param imageView The ImageView containing the icon
+	 * @param textView The textVirw containing the name of the screen
+	 */
+	static void tintViews(ImageView imageView, TextView textView)
+	{
+		int selectedColor = Color.parseColor("#2d3e50");
+		imageView.setColorFilter(selectedColor);
+		textView.setTextColor(selectedColor);
 	}
 }

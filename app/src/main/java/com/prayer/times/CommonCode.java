@@ -1,5 +1,6 @@
 package com.prayer.times;
 
+
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.Fragment;
@@ -24,6 +25,7 @@ import java.util.Arrays;
 import java.util.Date;
 import android.widget.*;
 
+
 /*
  * This is a static class which contains
  * constants and methods which are used
@@ -31,10 +33,13 @@ import android.widget.*;
  */
 class CommonCode
 {
-	private static final String PREF_SALAH = "PREF_SALAH";
 	private static SharedPreferences preferences;
 	private static QiblahFragment qiblahFragment = new QiblahFragment();
 	private static SettingsFragment settingsFragment = new SettingsFragment();
+	public static final String PREF_SALAH = "PREF_SALAH";
+	public static final String PREF_LATITUDE = "PREF_LATITUDE";
+	public static final String PREF_LONGITUDE = "PREF_LONGITUDE";
+
 
 	/*
 	 * Gets the prayer times for a given day
@@ -49,12 +54,15 @@ class CommonCode
 		Coordinates coordinates = new Coordinates(latitude, longitude);
 		DateComponents date = DateComponents.from(day);
 
+
 		CalculationParameters params = getCalculationParameters(context);
 		params.madhab = getMadhab();
+
 
 		PrayerTimes times = new PrayerTimes(coordinates, date, params);
 		return times;
 	}
+
 
 	/*
 	 * Returns parameters for the chosen calculation method
@@ -64,9 +72,11 @@ class CommonCode
 	{
 		String[] calculationMethods = context.getResources().getStringArray(R.array.calculationMethodValues); 
 
+
 		String calculationMethod = preferences.getString("calculation_method", calculationMethods[0]);
 		int position = Arrays.asList(calculationMethods).indexOf(calculationMethod);
 		CalculationParameters params = CalculationMethod.MUSLIM_WORLD_LEAGUE.getParameters();
+
 
 		switch (position)
 		{
@@ -96,8 +106,10 @@ class CommonCode
 				break;
 		}
 
+
 		return params;
 	}
+
 
 	/*
 	 * Gets madhab based on shared preferences. Default is shafi
@@ -109,6 +121,7 @@ class CommonCode
 		String madhab = preferences.getString("madhab", "shafi");
 		Madhab chosenMadhab = null;
 
+
 		switch (madhab)
 		{
 			case "shafi":
@@ -119,8 +132,10 @@ class CommonCode
 				break;
 		}
 
+
 		return chosenMadhab;
 	}
+
 
 	/*
 	 * Returns string format for displaying time in the preferred
@@ -132,6 +147,7 @@ class CommonCode
 		String chosen = preferences.getString("time_format", "24_hour_time");
 		String format = "HH:mm";
 
+
 		switch (chosen)
 		{
 			case "24_hour_time":
@@ -142,8 +158,12 @@ class CommonCode
 				break;
 		}
 
+
 		return format;
 	}
+
+
+
 
 	/*
      * This method is responsible for setting alarms
@@ -151,24 +171,40 @@ class CommonCode
      *
      * @param times a list of prayer times for which reminders should be set
      */
-	static void setReminders(Context context, PrayerTimes times)
+	static void setReminders(MainActivity activity)
 	{
 		Intent intent;
-		AlarmManager alarmManager = (AlarmManager) context.getSystemService(context.ALARM_SERVICE);
+		Date date = new Date();
+		PrayerTimes times = getPrayerTimes(activity, date, activity.latitude, activity.longitude);
+	
+		if (times.isha.getTime() < date.getTime())
+		{
+			date = new Date(date.getTime() + (1000 * 60 * 60 * 24));
+			times = getPrayerTimes(activity, date, activity.latitude, activity.longitude);
+		}
+
+
+		AlarmManager alarmManager = (AlarmManager) activity.getSystemService(activity.ALARM_SERVICE);
 		Date[] prayerDates = new Date[] {times.fajr, times.dhuhr, times.asr, times.maghrib, times.isha};
+
 
 		Prayer[] prayers = new Prayer[5];
 		for (int i = 0; i < 5; i++) prayers[i] = times.currentPrayer(prayerDates[i]);
 
+
 		for (Prayer salah : prayers)
 		{
-			intent = new Intent(context, AlarmReceiver.class);
-			intent.putExtra("SALAH_NAME", salah.name());
+			Toast.makeText(activity, salah.name() + " " + times.timeForPrayer(salah).toGMTString(), 5).show();
+			intent = new Intent(activity, AlarmReceiver.class);
+			intent.putExtra(PREF_SALAH, salah.name()); 
 			intent.setAction("intent.action.SET_PRAYER_REMINDER");
-			PendingIntent alarmIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
-			alarmManager.set(AlarmManager.RTC_WAKEUP, times.timeForPrayer(salah).getTime(), alarmIntent);
+			PendingIntent alarmIntent = PendingIntent.getBroadcast(activity, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+			//alarmManager.setExact(AlarmManager.RTC_WAKEUP, times.timeForPrayer(salah).getTime(), alarmIntent);
+			long time = times.timeForPrayer(salah).getTime();
+			alarmManager.setAlarmClock(new AlarmManager.AlarmClockInfo(time, alarmIntent), alarmIntent);
 		}
 	}
+
 
 	/*
 	 * This method is responsible for changing
@@ -180,18 +216,24 @@ class CommonCode
 		ImageView timingIcon = rootView.findViewById(R.id.timingNavIcon);
 		ImageView qiblahIcon = rootView.findViewById(R.id.qiblahNavIcon);
 
+
 		timingIcon.clearColorFilter();
 		qiblahIcon.clearColorFilter();
+
 
 		TextView timingText = rootView.findViewById(R.id.timingNavText);
 		TextView qiblahText = rootView.findViewById(R.id.qiblahNavText);
 
+
 		int defaultColor = Color.parseColor("#757575");
+
 
 		timingText.setTextColor(defaultColor);
 		qiblahText.setTextColor(defaultColor);
 
+
 		Activity activity = (Activity) context;
+
 
 		switch (screen)
 		{
@@ -210,6 +252,7 @@ class CommonCode
 		}
 	}
 
+
 	/*
 	 * Sets the onclick listeners on the bottom nav bar
 	 * as well as calling change_screen with the parameter
@@ -227,6 +270,7 @@ class CommonCode
 			}	
 		};
 
+
 		OnClickListener navigateToSettingsListener = new OnClickListener()
 		{
 			@Override
@@ -236,12 +280,15 @@ class CommonCode
 			}	
 		};
 
+
 		RelativeLayout qiblah = rootView.findViewById(R.id.qiblah_compass);
 		qiblah.setOnClickListener(navigateToQiblahListener);
+
 
 		RelativeLayout settings = rootView.findViewById(R.id.settings);
 		settings.setOnClickListener(navigateToSettingsListener);
 	}
+
 
 	/*
 	 * This method is used tint the views

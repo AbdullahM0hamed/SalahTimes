@@ -32,11 +32,9 @@ public class MainActivity extends AppCompatActivity implements LocationListener
 	private Calendar mCurrentCal = Calendar.getInstance(Locale.getDefault());
 	private TextView mHijriDateView;
 	private TextView mDateView;
-	private long mLatitude; 
-	private long mLongitude;
-	private SharedPreferences mPreferences;
-	private final static String LATITUDE = "PREF_LATITUDE";
-	private final static String LONGITUDE = "PREF_LONGITUDE";
+	public double latitude; 
+	public double longitude;
+	public SharedPreferences preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -73,21 +71,21 @@ public class MainActivity extends AppCompatActivity implements LocationListener
 		mDateView = findViewById(R.id.date);
 		mDateView.setText(getDate());
 	
-		mPreferences = this.getSharedPreferences(this.getPackageName() + "_preferences", this.MODE_PRIVATE);
-        mLongitude = mPreferences.getLong(LONGITUDE, 360);
-        mLatitude = mPreferences.getLong(LATITUDE, 360);
+		preferences = this.getSharedPreferences(this.getPackageName() + "_preferences", this.MODE_PRIVATE);
+        longitude = Double.valueOf(preferences.getString(CommonCode.PREF_LONGITUDE, "360"));
+        latitude = Double.valueOf(preferences.getString(CommonCode.PREF_LATITUDE, "360"));
 
 		CommonCode.setupNavigation(this, findViewById(R.id.rootView));
 		CommonCode.tintViews(getIcon(), getTextView());
 
         //Valid latitudes are between -90 and 90, and valid longitudes are between -180 and 180
-        if (mLongitude == 360 || mLatitude == 360) 
+        if (longitude == 360 || latitude == 360) 
         {
 			checkPermissionAndGetLocation();
 		}
 		else
 		{
-			setPrayerTimes(mLatitude, mLongitude);
+			setPrayerTimes(latitude, longitude);
 		}
     }
 
@@ -137,15 +135,15 @@ public class MainActivity extends AppCompatActivity implements LocationListener
 	public void onLocationChanged(Location p1)
 	{
 		setLocation(p1);
-		mLatitude = (long) p1.getLatitude();
-		mLongitude = (long) p1.getLongitude();
+		latitude = (long) p1.getLatitude();
+		longitude = (long) p1.getLongitude();
 
-		SharedPreferences.Editor editor = mPreferences.edit();
-		editor.putLong(LATITUDE, mLatitude);
-		editor.putLong(LONGITUDE, mLongitude);
+		SharedPreferences.Editor editor = preferences.edit();
+		editor.putString(CommonCode.PREF_LATITUDE, String.valueOf(latitude));
+		editor.putString(CommonCode.PREF_LONGITUDE, String.valueOf(longitude));
 		editor.apply();
 
-		setPrayerTimes(mLatitude, mLongitude);
+		setPrayerTimes(latitude, longitude);
 	}
 
 	@Override
@@ -204,7 +202,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener
 	void addToDate(int days)
 	{
 		mCurrentCal.add(Calendar.DATE, days);
-		setPrayerTimes(mLatitude, mLongitude);
+		setPrayerTimes(latitude, longitude);
 		mHijriDateView.setText(getHijriDate());
 		mDateView.setText(getDate());
 	}

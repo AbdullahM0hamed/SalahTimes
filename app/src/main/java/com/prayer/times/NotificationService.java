@@ -4,12 +4,18 @@ import android.app.IntentService;
 import android.app.NotificationManager;
 import android.app.NotificationChannel;
 import android.content.Intent;
+import android.content.res.AssetFileDescriptor;
+import android.media.AudioAttributes;
+import android.media.MediaPlayer;
 import android.support.v4.app.NotificationCompat;
+import java.io.IOException;
+import org.apache.commons.codec.binary.*;
 
 public class NotificationService extends IntentService
 {
 	private String mMessage;
 	private NotificationManager mNotificationManager;
+	private static MediaPlayer player = new MediaPlayer();
 
 	public NotificationService()
 	{
@@ -19,16 +25,21 @@ public class NotificationService extends IntentService
 	@Override
 	protected void onHandleIntent(Intent intent)
 	{
-		final String PREF_SALAH = "PREF_SALAH";
-		
-		mMessage = getResources().getString(R.string.prayer_reminder, intent.getStringExtra(PREF_SALAH));
+		String salah_name = intent.getStringExtra(CommonCode.PREF_SALAH);
+		salah_name = salah_name.substring(0, 1) + salah_name.substring(1).toLowerCase();
+		mMessage = getResources().getString(R.string.prayer_reminder, salah_name);
 		mNotificationManager = (NotificationManager) this.getSystemService(this.NOTIFICATION_SERVICE);
 		NotificationChannel channel = new NotificationChannel("salah_times", "adhan", NotificationManager.IMPORTANCE_LOW);
 		mNotificationManager.createNotificationChannel(channel);
-		createNotification();
+		try
+		{
+			createNotification();
+		}
+		catch (IOException e)
+		{}
 	}
 
-	private void createNotification()
+	private void createNotification() throws IOException
 	{
 		NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
 		        .setSmallIcon(R.drawable.ic_clock_white_24dp)
@@ -37,5 +48,15 @@ public class NotificationService extends IntentService
 				.setPriority(2);
 			
 		mNotificationManager.notify(001, notificationBuilder.build());
+		AssetFileDescriptor afd = getAssets().openFd("adhan.mp3");
+		player.setDataSource(
+		        afd.getFileDescriptor(),
+				afd.getStartOffset(),
+				afd.getLength());
+		player.setAudioAttributes(new AudioAttributes.Builder()
+		        .setUsage(AudioAttributes.USAGE_ALARM)
+				.build());
+		player.prepare();
+		player.start();
 	}
 }

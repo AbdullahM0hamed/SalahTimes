@@ -33,4 +33,7 @@
     <string name="start_heading">Start</string>
     <string name="next_prayer">Next Prayer: %1$s</string>
     <string name="prayer_reminder">Time to pray %1$s</string>
+    <string name="missing_sensors_title">Missing Sensors</string>
+    <string name="missing_sensors_description">Your device is lacking the necessary sensors to allow your device to have a working compass app. As an alternative, you must align the marked direction with the sun as you see it in the sky, in order to determine the direction of the qiblah.</string>
+    <string name="refresh">Refresh</string>
 </resources>

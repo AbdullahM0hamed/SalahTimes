@@ -60,6 +60,7 @@ public class SettingsFragment extends PreferenceFragment
 					
 				MainActivity activity = (MainActivity) getActivity();
 				CommonCode.tintViews(activity.getIcon(), activity.getTextView());
+				activity.setPrayerTimes(activity.latitude, activity.longitude);
 			}
 		});
 

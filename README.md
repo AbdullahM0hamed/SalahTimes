@@ -1,5 +1,5 @@
 <div align="center">
-<img src="https://github.com/AbdullahM0hamed/SalahTimes/blob/main/app/src/main/res/drawable/splash_icon">
+<img src="https://github.com/AbdullahM0hamed/SalahTimes/blob/main/app/src/main/res/drawable/splash_icon.png">
 <br>
 <strong><i>An android app which helps a Muslim keep track of the times of Salah</i></strong>
 </div>
@@ -27,8 +27,8 @@ The following screenshots showcase the app is it right now, and may change in th
 <img align="center" src="https://github.com/AbdullahM0hamed/SalahTimes/blob/main/screenshots/screenshot_splash.jpg">
 <img align="center" src="https://github.com/AbdullahM0hamed/SalahTimes/blob/main/screenshots/screenshot_prayer_times.jpg">
 <img align="center" src="https://github.com/AbdullahM0hamed/SalahTimes/blob/main/screenshots/screenshot_missing_sensors.jpg">
-<img align="center" src="https://github.com/AbdullahM0hamed/SalahTimes/blob/main/screenshots/screenshot_solar_compass">
-<img align="center" src="https://github.com/AbdullahM0hamed/SalahTimes/blob/main/screenshots/screenshot_settings">
+<img align="center" src="https://github.com/AbdullahM0hamed/SalahTimes/blob/main/screenshots/screenshot_solar_compass.jpg">
+<img align="center" src="https://github.com/AbdullahM0hamed/SalahTimes/blob/main/screenshots/screenshot_settings.jpg">
 
 ## Open-source libraries
 

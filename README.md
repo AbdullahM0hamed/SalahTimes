@@ -40,5 +40,5 @@ The following are the open-source libraries used in this prproject (bar anything
 ## Thanks
 
 To:
-  - @Thunderbolt-Blue for the original design on which this app is based
+  - [Thunderbolt-Blue](https://github.com/Thunderbolt-Blue) for the original design on which this app is based
   - My sister for the logo (though I plan to add several others for the sake of choice)

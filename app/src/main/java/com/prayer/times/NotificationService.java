@@ -11,52 +11,44 @@ import android.support.v4.app.NotificationCompat;
 import java.io.IOException;
 import org.apache.commons.codec.binary.*;
 
-public class NotificationService extends IntentService
-{
-	private String mMessage;
-	private NotificationManager mNotificationManager;
-	private static MediaPlayer player = new MediaPlayer();
+public class NotificationService extends IntentService {
+  private String mMessage;
+  private NotificationManager mNotificationManager;
+  private static MediaPlayer player = new MediaPlayer();
 
-	public NotificationService()
-	{
-		super("com.prayer.times");
-	}
+  public NotificationService() {
+    super("com.prayer.times");
+  }
 
-	@Override
-	protected void onHandleIntent(Intent intent)
-	{
-		String salah_name = intent.getStringExtra(CommonCode.PREF_SALAH);
-		salah_name = salah_name.substring(0, 1) + salah_name.substring(1).toLowerCase();
-		mMessage = getResources().getString(R.string.prayer_reminder, salah_name);
-		mNotificationManager = (NotificationManager) this.getSystemService(this.NOTIFICATION_SERVICE);
-		NotificationChannel channel = new NotificationChannel("salah_times", "adhan", NotificationManager.IMPORTANCE_LOW);
-		mNotificationManager.createNotificationChannel(channel);
-		try
-		{
-			createNotification();
-		}
-		catch (IOException e)
-		{}
-	}
+  @Override
+  protected void onHandleIntent(Intent intent) {
+    String salah_name = intent.getStringExtra(CommonCode.PREF_SALAH);
+    salah_name = salah_name.substring(0, 1) + salah_name.substring(1).toLowerCase();
+    mMessage = getResources().getString(R.string.prayer_reminder, salah_name);
+    mNotificationManager = (NotificationManager) this.getSystemService(this.NOTIFICATION_SERVICE);
+    NotificationChannel channel =
+        new NotificationChannel("salah_times", "adhan", NotificationManager.IMPORTANCE_LOW);
+    mNotificationManager.createNotificationChannel(channel);
+    try {
+      createNotification();
+    } catch (IOException e) {
+    }
+  }
 
-	private void createNotification() throws IOException
-	{
-		NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
-		        .setSmallIcon(R.drawable.ic_clock_white_24dp)
-				.setContentTitle(mMessage)
-				.setChannelId("salah_times")
-				.setPriority(2);
-			
-		mNotificationManager.notify(001, notificationBuilder.build());
-		AssetFileDescriptor afd = getAssets().openFd("adhan.mp3");
-		player.setDataSource(
-		        afd.getFileDescriptor(),
-				afd.getStartOffset(),
-				afd.getLength());
-		player.setAudioAttributes(new AudioAttributes.Builder()
-		        .setUsage(AudioAttributes.USAGE_ALARM)
-				.build());
-		player.prepare();
-		player.start();
-	}
+  private void createNotification() throws IOException {
+    NotificationCompat.Builder notificationBuilder =
+        new NotificationCompat.Builder(this)
+            .setSmallIcon(R.drawable.ic_clock_white_24dp)
+            .setContentTitle(mMessage)
+            .setChannelId("salah_times")
+            .setPriority(2);
+
+    mNotificationManager.notify(001, notificationBuilder.build());
+    AssetFileDescriptor afd = getAssets().openFd("adhan.mp3");
+    player.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength());
+    player.setAudioAttributes(
+        new AudioAttributes.Builder().setUsage(AudioAttributes.USAGE_ALARM).build());
+    player.prepare();
+    player.start();
+  }
 }

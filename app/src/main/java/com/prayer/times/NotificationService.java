@@ -9,7 +9,6 @@ import android.media.AudioAttributes;
 import android.media.MediaPlayer;
 import android.support.v4.app.NotificationCompat;
 import java.io.IOException;
-import org.apache.commons.codec.binary.*;
 
 public class NotificationService extends IntentService {
   private String mMessage;

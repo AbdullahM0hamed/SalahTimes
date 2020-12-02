@@ -3,8 +3,7 @@ name: Build App
 on:
   push:
     branches:
-      - main
-    pull_request:
+      - '*'
 
 jobs:
   check_wrapper:
@@ -38,15 +37,24 @@ jobs:
           java-version: 1.8
 
       - name: Build app
-        uses: eskos/gradle-command-action@v1
+        uses: eskatos/gradle-command-action@v1
         with:
-          arguments: assembleStandardDebug
+          arguments: assembleRelease
           wrapper-cache-enabled: true
           dependencies-cache-enabled: true
           configuration-cache-enabled: true
 
+      - name: Sign APK
+        uses: r0adkll/sign-android-release@v1
+        with:
+          releaseDirectory: app/build/outputs/apk/release
+          signingKeyBase64: ${{ secrets.SIGNING_KEY }}
+          alias: ${{ secrets.ALIAS }}
+          keyStorePassword: ${{ secrets.PASSWORD }}
+          keyPassword: ${{ secrets.PASSWORD }}
+
       - name: Upload Artifact
         uses: actions/upload-artifact@v2
         with:
-          name: SalahTimes.apk
-          path: app/build/outputs/apk/dev/debug/app-dev-debug.apk
+          name: SalahTimes
+          path: app/build/outputs/apk/release/*-signed.apk

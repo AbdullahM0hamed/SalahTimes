@@ -21,6 +21,7 @@ import com.batoulapps.adhan.Prayer;
 import com.batoulapps.adhan.PrayerTimes;
 import com.batoulapps.adhan.data.DateComponents;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 import android.widget.*;
 
@@ -54,6 +55,26 @@ class CommonCode {
 
     PrayerTimes times = new PrayerTimes(coordinates, date, params);
     return times;
+  }
+
+  static Prayer getNextPrayer(Context context) {
+    Calendar calendar = Calendar.getInstance();
+    double latitude = Double.valueOf(preferences.getString(PREF_LATITUDE, ""));
+    double longitude = Double.valueOf(preferences.getString(PREF_LONGITUDE, ""));
+    PrayerTimes times = getPrayerTimes(context, calendar.getTime(), latitude, longitude);
+
+    Prayer nextPrayer = null;
+    nextPrayer = times.nextPrayer();
+
+    if (nextPrayer.name() == "NONE") {
+      calendar.add(Calendar.DATE, 1);
+      times = getPrayerTimes(context, calendar.getTime(), latitude, longitude);
+      nextPrayer = times.currentPrayer(times.fajr);
+    }
+
+    if (nextPrayer.name() != "SUNRISE") return nextPrayer;
+
+    return times.nextPrayer(times.sunrise);
   }
 
   /*

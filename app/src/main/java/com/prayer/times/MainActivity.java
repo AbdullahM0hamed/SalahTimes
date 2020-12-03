@@ -285,28 +285,19 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     }
 
     times = CommonCode.getPrayerTimes(this, new Date(), latitude, longitude);
-    Prayer nextPrayer = times.nextPrayer();
     TextView next = findViewById(R.id.nextPrayer);
+    Prayer prayer = CommonCode.getNextPrayer(this);
+    Date nextPrayer = null;
 
-    //If 'Isha has already come, getting the next Prayer's time throws a NullPointerException
     try {
-      Date nextPrayerTime = times.timeForPrayer(nextPrayer);
-
-      //Gets the prayer following sunrise, thus effectively skipping sunrise as next prayer
-      if (nextPrayer.name() == "SUNRISE") {
-        nextPrayerTime = times.timeForPrayer(times.nextPrayer(times.sunrise));
-      }
-      next.setText(
-          getResources().getString(R.string.next_prayer, formatter.format(nextPrayerTime)));
+      nextPrayer = times.timeForPrayer(prayer);
     } catch (NullPointerException e) {
-      Calendar calendar = Calendar.getInstance(Locale.getDefault());
-      calendar.add(Calendar.DATE, 1);
-      Date tomorrow = calendar.getTime();
-      PrayerTimes tomorrowTimes = CommonCode.getPrayerTimes(this, tomorrow, latitude, longitude);
-      next.setText(
-          getResources().getString(R.string.next_prayer, formatter.format(tomorrowTimes.fajr)));
-      timeList =
-          new Date[] {times.fajr, times.sunrise, times.dhuhr, times.asr, times.maghrib, times.isha};
+      Calendar cal = Calendar.getInstance();
+      cal.add(Calendar.DATE, 1);
+      times = CommonCode.getPrayerTimes(this, cal.getTime(), latitude, longitude);
+      nextPrayer = times.timeForPrayer(prayer);
     }
+
+    next.setText(getResources().getString(R.string.next_prayer, formatter.format(nextPrayer)));
   }
 }

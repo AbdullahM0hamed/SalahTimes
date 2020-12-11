@@ -10,7 +10,7 @@ public class AlarmReceiver extends BroadcastReceiver {
     if (intent.getAction() == "intent.action.SET_PRAYER_REMINDER") {
       Intent serviceIntent = new Intent(context, NotificationService.class);
       serviceIntent.putExtras(intent);
-      context.startService(serviceIntent);
+      NotificationService.enqueueWork(context, serviceIntent);
     }
   }
 }

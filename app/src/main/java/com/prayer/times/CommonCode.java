@@ -38,6 +38,27 @@ class CommonCode {
   public static final String PREF_LATITUDE = "PREF_LATITUDE";
   public static final String PREF_LONGITUDE = "PREF_LONGITUDE";
 
+  public static class Salah {
+    private String name;
+    private Date time;
+
+    public void setName(String newName) {
+      this.name = newName;
+    }
+
+    public String getName() {
+      return this.name;
+    }
+
+    public void setDate(Date newTime) {
+      this.time = newTime;
+    }
+
+    public Date getTime() {
+      return this.time;
+    }
+  }
+
   /*
    * Gets the prayer times for a given day
    *
@@ -57,7 +78,7 @@ class CommonCode {
     return times;
   }
 
-  static Prayer getNextPrayer(Context context) {
+  static Salah getNextPrayer(Context context) {
     Calendar calendar = Calendar.getInstance();
     double latitude = Double.valueOf(preferences.getString(PREF_LATITUDE, ""));
     double longitude = Double.valueOf(preferences.getString(PREF_LONGITUDE, ""));
@@ -72,13 +93,20 @@ class CommonCode {
       nextPrayer = times.currentPrayer(times.fajr);
     }
 
-    if (nextPrayer.name() != "SUNRISE") return nextPrayer;
+    Salah nextSalah = new Salah();
 
-    return times.nextPrayer(times.sunrise);
+    if (nextPrayer.name() == "SUNRISE") {
+      nextPrayer = times.nextPrayer(times.sunrise);
+    }
+
+    String name = nextPrayer.name();
+    nextSalah.setName(name.substring(0, 1) + name.substring(1).toLowerCase());
+    nextSalah.setDate(times.timeForPrayer(nextPrayer));
+    return nextSalah;
   }
 
   /*
-   * Returns parameters for the chosen calculation method
+   * @return the parameters for the chosen calculation method
    * in shared preferences. Default is muslim_world_league
    */
   static CalculationParameters getCalculationParameters(Context context) {
@@ -122,7 +150,7 @@ class CommonCode {
   /*
    * Gets madhab based on shared preferences. Default is shafi
    *
-   * @returns Madhab object for a given madhab
+   * @return Madhab object for a given madhab
    */
   static Madhab getMadhab() {
     String madhab = preferences.getString("madhab", "shafi");
@@ -141,7 +169,7 @@ class CommonCode {
   }
 
   /*
-   * Returns string format for displaying time in the preferred
+   * @return string format for displaying time in the preferred
    * way for the user. The default format is 24 hours
    */
   static String getTimeFormat(Context context) {
@@ -167,42 +195,36 @@ class CommonCode {
    * This method is responsible for setting alarms
    * for prayer times
    *
-   * @param times a list of prayer times for which reminders should be set
+   * @param context the content which will be used to get the alarm service
+   * @param name the name of the salah for which the reminder is to be set
+   * @param time the time of the salah for which the reminder is to be set
    */
-  static void setReminders(MainActivity activity) {
+  static void setReminder(Context context, String name, Date time) {
     Intent intent;
-    Date date = new Date();
-    PrayerTimes times = getPrayerTimes(activity, date, activity.latitude, activity.longitude);
+    AlarmManager alarmManager = (AlarmManager) context.getSystemService(context.ALARM_SERVICE);
 
-    if (times.isha.getTime() < date.getTime()) {
-      date = new Date(date.getTime() + (1000 * 60 * 60 * 24));
-      times = getPrayerTimes(activity, date, activity.latitude, activity.longitude);
-    }
+    intent = new Intent(context, AlarmReceiver.class);
+    intent.putExtra(PREF_SALAH, name);
+    intent.setAction("intent.action.SET_PRAYER_REMINDER");
+    PendingIntent alarmIntent =
+        PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
 
-    AlarmManager alarmManager = (AlarmManager) activity.getSystemService(activity.ALARM_SERVICE);
-    Date[] prayerDates = new Date[] {times.fajr, times.dhuhr, times.asr, times.maghrib, times.isha};
+    Intent infoIntent = new Intent(context, MainActivity.class);
+    infoIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+    PendingIntent pInfoIntent = PendingIntent.getActivity(context, 0, infoIntent, 0);
 
-    Prayer[] prayers = new Prayer[5];
-    for (int i = 0; i < 5; i++) prayers[i] = times.currentPrayer(prayerDates[i]);
-
-    for (Prayer salah : prayers) {
-      Toast.makeText(activity, salah.name() + " " + times.timeForPrayer(salah).toGMTString(), 5)
-          .show();
-      intent = new Intent(activity, AlarmReceiver.class);
-      intent.putExtra(PREF_SALAH, salah.name());
-      intent.setAction("intent.action.SET_PRAYER_REMINDER");
-      PendingIntent alarmIntent =
-          PendingIntent.getBroadcast(activity, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
-      //alarmManager.setExact(AlarmManager.RTC_WAKEUP, times.timeForPrayer(salah).getTime(), alarmIntent);
-      long time = times.timeForPrayer(salah).getTime();
-      alarmManager.setAlarmClock(new AlarmManager.AlarmClockInfo(time, alarmIntent), alarmIntent);
-    }
+    alarmManager.setAlarmClock(
+        new AlarmManager.AlarmClockInfo(time.getTime(), pInfoIntent), alarmIntent);
   }
 
   /*
    * This method is responsible for changing
    * between screens when user clicks
    * a button on the bottom nav bar
+   *
+   * @param context The context to be used to get the fragmentManager
+   * @param rootView The root view to be used to get the sub-views in the bottom navigation bar
+   * @param screen The name of the screen to navigate to
    */
   static void changeScreen(Context context, View rootView, String screen) {
     ImageView timingIcon = rootView.findViewById(R.id.timingNavIcon);
@@ -244,6 +266,9 @@ class CommonCode {
    * as well as calling change_screen with the parameter
    * 'salah_timings', which results in the initial setting
    * of prayer timings
+   *
+   * @param context The context to be passed to the change_screen method
+   * @param rootView The root view from which we can extract the sub-views in the bottom navigation bar
    */
   static void setupNavigation(final Context context, final View rootView) {
     OnClickListener navigateToQiblahListener =

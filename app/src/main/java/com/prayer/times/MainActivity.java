@@ -286,18 +286,11 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
 
     times = CommonCode.getPrayerTimes(this, new Date(), latitude, longitude);
     TextView next = findViewById(R.id.nextPrayer);
-    Prayer prayer = CommonCode.getNextPrayer(this);
-    Date nextPrayer = null;
+    CommonCode.Salah prayer = CommonCode.getNextPrayer(this);
 
-    try {
-      nextPrayer = times.timeForPrayer(prayer);
-    } catch (NullPointerException e) {
-      Calendar cal = Calendar.getInstance();
-      cal.add(Calendar.DATE, 1);
-      times = CommonCode.getPrayerTimes(this, cal.getTime(), latitude, longitude);
-      nextPrayer = times.timeForPrayer(prayer);
-    }
-
-    next.setText(getResources().getString(R.string.next_prayer, formatter.format(nextPrayer)));
+    next.setText(
+        getResources().getString(R.string.next_prayer, formatter.format(prayer.getTime())));
+	
+	CommonCode.setReminder(this, prayer.getName(), prayer.getTime());
   }
 }

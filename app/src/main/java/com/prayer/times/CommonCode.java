@@ -23,6 +23,7 @@ import com.batoulapps.adhan.data.DateComponents;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import android.widget.*;
 
 /*
@@ -34,6 +35,16 @@ class CommonCode {
   private static SharedPreferences preferences;
   private static QiblahFragment qiblahFragment = new QiblahFragment();
   private static SettingsFragment settingsFragment = new SettingsFragment();
+  private static HashMap salahStringMap =
+      new HashMap<String, Integer>() {
+        {
+          put("FAJR", R.string.fajr);
+          put("DHUHR", R.string.dhuhr);
+          put("ASR", R.string.asr);
+          put("MAGHRIB", R.string.maghrib);
+          put("ISHA", R.string.isha);
+        }
+      };
   public static final String PREF_SALAH = "PREF_SALAH";
   public static final String PREF_LATITUDE = "PREF_LATITUDE";
   public static final String PREF_LONGITUDE = "PREF_LONGITUDE";
@@ -100,7 +111,7 @@ class CommonCode {
     }
 
     String name = nextPrayer.name();
-    nextSalah.setName(name.substring(0, 1) + name.substring(1).toLowerCase());
+    nextSalah.setName(context.getResources().getString((int) salahStringMap.get(name)));
     nextSalah.setDate(times.timeForPrayer(nextPrayer));
     return nextSalah;
   }

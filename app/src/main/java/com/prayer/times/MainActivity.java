@@ -290,7 +290,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
 
     next.setText(
         getResources().getString(R.string.next_prayer, formatter.format(prayer.getTime())));
-	
-	CommonCode.setReminder(this, prayer.getName(), prayer.getTime());
+
+    CommonCode.setReminder(this, prayer.getName(), prayer.getTime());
   }
 }

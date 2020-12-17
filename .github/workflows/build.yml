@@ -53,8 +53,13 @@ jobs:
           keyStorePassword: ${{ secrets.PASSWORD }}
           keyPassword: ${{ secrets.PASSWORD }}
 
+      - name: Rename app
+        run: |
+          cd app/build/outputs/apk/release
+          mv app-release-unsigned-signed.apk SalahTimes.apk
+
       - name: Upload Artifact
         uses: actions/upload-artifact@v2
         with:
           name: SalahTimes
-          path: app/build/outputs/apk/release/*-signed.apk
+          path: app/build/outputs/apk/release/SalahTimes.apk

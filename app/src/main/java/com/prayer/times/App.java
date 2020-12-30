@@ -12,6 +12,7 @@ public class App extends Application {
 
   public static void startAdhan() throws IOException {
     sIntance.mPlayer.stop();
+    sIntance.mPlayer.setScreenOnWhilePlaying(true);
     AssetFileDescriptor descriptor = sIntance.getAssets().openFd("adhan.mp3");
     sIntance.mPlayer.setDataSource(
         descriptor.getFileDescriptor(), descriptor.getStartOffset(), descriptor.getLength());
@@ -23,12 +24,6 @@ public class App extends Application {
 
   public static void stopAdhan() {
     sIntance.mPlayer.stop();
-  }
-
-  public static void updatePrayerAlarm() {
-    CommonCode.Salah nextPrayer = CommonCode.getNextPrayer(sIntance.getApplicationContext());
-    CommonCode.setReminder(
-        sIntance.getApplicationContext(), nextPrayer.getName(), nextPrayer.getTime());
   }
 
   @Override

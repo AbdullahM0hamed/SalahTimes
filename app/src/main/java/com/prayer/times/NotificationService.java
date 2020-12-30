@@ -26,7 +26,10 @@ public class NotificationService extends JobIntentService {
     salah_name = salah_name.substring(0, 1) + salah_name.substring(1).toLowerCase();
     mMessage = getResources().getString(R.string.prayer_reminder, salah_name);
     createNotification();
-    App.updatePrayerAlarm();
+    try {
+      App.startAdhan();
+    } catch (IOException e) {
+    }
   }
 
   private void createNotification() {

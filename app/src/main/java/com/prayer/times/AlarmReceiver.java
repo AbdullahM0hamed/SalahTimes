@@ -11,6 +11,12 @@ public class AlarmReceiver extends BroadcastReceiver {
       Intent serviceIntent = new Intent(context, NotificationService.class);
       serviceIntent.putExtras(intent);
       NotificationService.enqueueWork(context, serviceIntent);
+      updatePrayerAlarm(context);
     }
+  }
+
+  void updatePrayerAlarm(Context context) {
+    CommonCode.Salah nextPrayer = CommonCode.getNextPrayer(context);
+    CommonCode.setReminder(context, nextPrayer.getName(), nextPrayer.getTime());
   }
 }

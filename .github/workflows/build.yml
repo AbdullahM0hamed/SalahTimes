@@ -36,6 +36,11 @@ jobs:
         with:
           java-version: 1.8
 
+      - name: Add API key
+        run: perl -pi -e "s/GOOGLE_MAPS_API_KEY/$TOKEN/" app/src/main/AndroidManifest.xml
+        env:
+          TOKEN: ${{ secrets.MAP_KEY }}
+
       - name: Build app
         uses: eskatos/gradle-command-action@v1
         with:

@@ -1,11 +1,11 @@
 <resources>
     <string name="app_name">Salah Times</string>
-	<string name="action_settings">Settings</string>
-	<string name="fajr">Fajr</string>
-	<string name="sunrise">Sunrise</string>
-	<string name="dhuhr">Dhuhr</string>
-	<string name="asr">Asr</string>
-	<string name="maghrib">Maghrib</string>
+    <string name="action_settings">Settings</string>
+    <string name="fajr">Fajr</string>
+    <string name="sunrise">Sunrise</string>
+    <string name="dhuhr">Dhuhr</string>
+    <string name="asr">Asr</string>
+    <string name="maghrib">Maghrib</string>
     <string name="isha">Isha</string>
     <string name="salah_times">Salah Times</string>
     <string name="qiblah_string">Qiblah</string>
@@ -36,4 +36,6 @@
     <string name="missing_sensors_title">Missing Sensors</string>
     <string name="missing_sensors_description">Your device is lacking the necessary sensors to allow your device to have a working compass app. As an alternative, you must align the marked direction with the sun as you see it in the sky, in order to determine the direction of the qiblah.</string>
     <string name="refresh">Refresh</string>
+    <string name="notification_adhan">Adhan</string>
+    <string name="notification_description">Adhan and pop up on screen</string>
 </resources>

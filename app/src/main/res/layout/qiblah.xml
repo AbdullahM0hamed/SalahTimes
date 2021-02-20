@@ -22,5 +22,4 @@
 			android:id="@+id/prayer_mat"
 			android:layout_centerInParent="true" />
 	</RelativeLayout>
-	<include layout="@layout/bottom_nav" />
 </RelativeLayout>

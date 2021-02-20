@@ -132,7 +132,7 @@
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:textSize="35dp"
-                    android:text="@string/prayer_heading"
+				        android:text="@string/prayer_heading"
 					android:gravity="center_horizontal"/>
 
 				<TextView
@@ -140,7 +140,7 @@
 					android:layout_height="wrap_content"
 					android:textSize="35dp"
 					android:gravity="center_horizontal"
-                    android:text="@string/start_heading"/>
+				        android:text="@string/start_heading"/>
 
 			</TableRow>
 
@@ -273,7 +273,4 @@
 		</TableLayout>
 
     </LinearLayout>
-
-    <include layout="@layout/bottom_nav" />
-
 </RelativeLayout>

@@ -11,7 +11,7 @@ class SettingsController : BaseController<PreferencesLayoutBinding>() {
         inflater: LayoutInflater,
         container: ViewGroup
     ): View {
-        val binding = PreferencesLayoutBinding.inflate(inflater)
+        binding = PreferencesLayoutBinding.inflate(inflater)
         return binding.root
     }
 }

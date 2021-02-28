@@ -58,6 +58,13 @@ class TimesController : BaseController<TimesLayoutBinding>() {
         }
     }
 
+    override fun onDestroyView(view: View) {
+        super.onDestroyView(view)
+
+        //Unsubscribe
+        storeSubscription()
+    }
+
     fun getHijriDate(date: Date): String {
         val hijriCalendar = UmmalquraCalendar()
         val localFormatter = SimpleDateFormat("EEEE, dd MMMM yyyy")

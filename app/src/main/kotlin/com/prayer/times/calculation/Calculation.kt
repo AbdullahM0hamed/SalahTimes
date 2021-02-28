@@ -9,6 +9,7 @@ import com.batoulapps.adhan.Coordinates
 import com.batoulapps.adhan.Madhab
 import com.batoulapps.adhan.PrayerTimes
 import com.batoulapps.adhan.data.DateComponents
+import com.batoulapps.adhan.internal.QiblaUtil
 import com.prayer.times.Constants
 import com.prayer.times.preference.PreferencesHelper
 import com.prayer.times.receiver.AlarmReceiver
@@ -23,6 +24,7 @@ class Calculation(
     private val helper = PreferencesHelper(context)
     private val latitude = helper.getString(Constants.LATITUDE)!!.toDouble()
     private val longitude = helper.getString(Constants.LONGITUDE)!!.toDouble()
+    private val coordinates = Coordinates(latitude, longitude)
 
     data class Salah(
         val name: String,
@@ -30,7 +32,6 @@ class Calculation(
     )
 
     fun getPrayerTimes(day: Date?): PrayerTimes {
-        val coordinates = Coordinates(latitude, longitude)
         val date = DateComponents.from(day)
 
         val params = CalculationMethod.NORTH_AMERICA.getParameters()
@@ -71,4 +72,6 @@ class Calculation(
         alarmManager.setAlarmClock(
             AlarmManager.AlarmClockInfo(nextPrayer.time.getTime(), pendingIntent), pendingIntent)
     }
+
+    fun getQiblahDirection() = QiblaUtil.calculateQiblaDirection(coordinates).toFloat()
 }

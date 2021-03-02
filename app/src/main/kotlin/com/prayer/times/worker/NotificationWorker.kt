@@ -1,4 +1,4 @@
-package com.prayer.times.service
+package com.prayer.times.worker
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -14,7 +14,7 @@ import com.prayer.times.Constants
 import com.prayer.times.R
 import com.prayer.times.calculation.Calculation
 
-class NotificationService(context: Context, workerParams: WorkerParameters) : Worker(context, workerParams) {
+class NotificationWorker(context: Context, workerParams: WorkerParameters) : Worker(context, workerParams) {
 
     private val channelId = "${context.packageName}-adhan"
     private val notificationManager = context.getSystemService(NotificationManager::class.java)

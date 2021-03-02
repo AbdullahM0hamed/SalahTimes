@@ -40,7 +40,6 @@ dependencies {
         exclude group: "com.android.support"
     }
 
-    implementation 'com.schibstedspain.android:leku:8.0.0'
     implementation 'androidx.preference:preference-ktx:1.1.1'
     implementation 'com.karumi:dexter:6.2.2'
     implementation 'com.github.Mindinventory:VanillaPlacePicker:0.1.3'

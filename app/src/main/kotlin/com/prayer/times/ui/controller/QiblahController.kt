@@ -68,7 +68,9 @@ class QiblahController :
                     mainStore.dispatch(UpdateSunState(Constants.SUN_EAST))
                 }
 
-                mainStore.dispatch(SetRotation(0f, calculator.getQiblahDirection()))
+                if (mainStore.state.compassState.qiblahAngle != calculator.getQiblahDirection()) {
+                    mainStore.dispatch(SetRotation(0f, calculator.getQiblahDirection()))
+                }
             } else {
                 registerListener()
             }

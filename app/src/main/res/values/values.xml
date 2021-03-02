@@ -1,4 +1,4 @@
 ﻿<resources>
-	<dimen name="date">20dp</dimen>
-	<dimen name="timing">25dp</dimen>
+	<dimen name="date">20sp</dimen>
+	<dimen name="timing">25sp</dimen>
 </resources>

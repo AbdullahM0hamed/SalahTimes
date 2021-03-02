@@ -9,13 +9,13 @@ import androidx.work.WorkRequest
 import androidx.work.workDataOf
 import com.prayer.times.Constants
 import com.prayer.times.R
-import com.prayer.times.service.NotificationService
+import com.prayer.times.worker.NotificationWorker
 
 class AlarmReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
         if (intent.getAction() == Constants.SET_PRAYER_REMINDER) {
             val prayerAlarmRequest: WorkRequest =
-                OneTimeWorkRequest.Builder(NotificationService::class.java)
+                OneTimeWorkRequest.Builder(NotificationWorker::class.java)
                     .setInputData(
                         workDataOf(
                             Constants.SALAH_NAME to getName(context, intent.getStringExtra(Constants.SALAH_NAME))

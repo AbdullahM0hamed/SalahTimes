@@ -25,7 +25,7 @@ abstract class SettingsController : BaseController<PreferencesLayoutBinding>() {
         return binding.root
     }
 
-    abstract fun getSettingsList(): List<AbstractItem<RecyclerView.ViewHolder>> 
+    abstract fun getSettingsList(): List<AbstractItem<FastAdapter.ViewHolder>> 
 
     override fun onViewCreated(view: View) {
         super.onViewCreated(view)

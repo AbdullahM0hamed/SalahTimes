@@ -8,7 +8,7 @@ class SettingsControllerMain : SettingsController() {
 
     override fun getSettingsList() = listOf(
         SettingsItemMain(
-            resources.getString(R.string.settings_general),
+            resources!!.getString(R.string.settings_general),
             R.drawable.ic_general_24dp,
             this
         )

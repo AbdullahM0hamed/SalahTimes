@@ -77,7 +77,7 @@ class MainActivity :
                 when (id) {
                     R.id.nav_times -> setRoot(TimesController())
                     R.id.nav_qiblah -> setRoot(QiblahController())
-                    R.id.nav_settings -> setRoot(SettingsController())
+                    R.id.nav_settings -> setRoot(SettingsControllerMain())
                 }
             }
             true

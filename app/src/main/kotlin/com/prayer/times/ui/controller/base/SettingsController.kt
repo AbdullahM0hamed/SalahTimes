@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.GenericFastAdapter
 import com.mikepenz.fastadapter.items.AbstractItem
@@ -24,7 +25,7 @@ abstract class SettingsController : BaseController<PreferencesLayoutBinding>() {
         return binding.root
     }
 
-    abstract fun getSettingsList(): List<AbstractItem> 
+    abstract fun getSettingsList(): List<AbstractItem<RecyclerView.ViewHolder>> 
 
     override fun onViewCreated(view: View) {
         super.onViewCreated(view)

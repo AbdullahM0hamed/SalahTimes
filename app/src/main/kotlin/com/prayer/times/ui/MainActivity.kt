@@ -23,8 +23,8 @@ import com.prayer.times.preference.PreferencesHelper
 import com.prayer.times.receiver.AlarmReceiver
 import com.prayer.times.ui.action.UpdateTimes
 import com.prayer.times.ui.controller.QiblahController
-import com.prayer.times.ui.controller.SettingsController
 import com.prayer.times.ui.controller.TimesController
+import com.prayer.times.ui.controller.settings.SettingsControllerMain
 import com.prayer.times.ui.controller.base.BaseController
 import com.prayer.times.ui.reducer.appStateReducer
 import com.prayer.times.ui.state.AppState

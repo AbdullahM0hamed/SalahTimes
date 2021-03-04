@@ -1,12 +1,12 @@
-package com.prayer.times.ui.controller
+package com.prayer.times.ui.controller.base
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.mikepenz.fastdapter.FastAdapter
-import com.mikepenz.fastadapter.binding.AbstractBindingItem
+import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.GenericFastAdapter
+import com.mikepenz.fastadapter.items.AbstractItem
 import com.mikepenz.fastadapter.adapters.GenericItemAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter.Companion.items
 import com.prayer.times.databinding.PreferencesLayoutBinding

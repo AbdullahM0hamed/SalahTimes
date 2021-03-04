@@ -1,4 +1,4 @@
-package com.prayer.times.ui.settings
+package com.prayer.times.ui.controller.settings
 
 import android.view.View
 import androidx.viewbinding.ViewBinding
@@ -12,7 +12,7 @@ import com.prayer.times.ui.controller.base.BaseController
 data class SettingsItemMain(
     val name: String,
     val icon: Int,
-    val controller: BaseController<VB: ViewBinding>
+    val controller: BaseController<ViewBinding>
 ) : AbstractItem<SettingsItemMain.ViewHolder>() {
 
     override val type: Int

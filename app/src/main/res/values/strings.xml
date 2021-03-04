@@ -38,4 +38,6 @@
     <string name="refresh">Refresh</string>
     <string name="notification_adhan">Adhan</string>
     <string name="notification_description">Adhan and pop up on screen</string>
+
+    <string name="settings_general">General</string>
 </resources>

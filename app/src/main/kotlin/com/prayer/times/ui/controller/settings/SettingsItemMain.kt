@@ -1,16 +1,19 @@
 package com.prayer.times.ui.settings
 
 import android.view.View
+import androidx.viewbinding.ViewBinding
+import android.widget.ImageView
+import android.widget.TextView
 import com.mikepenz.fastadapter.FastAdapter
-import com.mikepenz.fastadapter.binding.AbstractBindingItem
+import com.mikepenz.fastadapter.items.AbstractItem
 import com.prayer.times.R
 import com.prayer.times.ui.controller.base.BaseController
 
 data class SettingsItemMain(
     val name: String,
     val icon: Int,
-    val controller: BaseController
-) : AbstractBindingItem<SettingsItemMain.ViewHolder>() {
+    val controller: BaseController<VB: ViewBinding>
+) : AbstractItem<SettingsItemMain.ViewHolder>() {
 
     override val type: Int
         get() = R.id.settings_item_main
@@ -19,8 +22,8 @@ data class SettingsItemMain(
         get() = R.layout.preference
 
     class ViewHolder(view: View) : FastAdapter.ViewHolder<SettingsItemMain>(view) {
-        var icon = view.findViewById(android.R.id.icon)
-        var name = view.findViewById(android.R.id.title)
+        var icon: ImageView = view.findViewById(android.R.id.icon)
+        var name: TextView = view.findViewById(android.R.id.title)
 
         override fun bindView(item: SettingsItemMain, payloads: List<Any>) {
             icon.setImageResource(item.icon)

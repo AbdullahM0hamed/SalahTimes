@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.mikepenz.fastdapter.FastAdapter
 import com.mikepenz.fastadapter.binding.AbstractBindingItem
 import com.mikepenz.fastadapter.GenericFastAdapter
 import com.mikepenz.fastadapter.adapters.GenericItemAdapter
@@ -11,7 +12,7 @@ import com.mikepenz.fastadapter.adapters.ItemAdapter.Companion.items
 import com.prayer.times.databinding.PreferencesLayoutBinding
 import com.prayer.times.ui.controller.base.BaseController
 
-class SettingsController : BaseController<PreferencesLayoutBinding>() {
+abstract class SettingsController : BaseController<PreferencesLayoutBinding>() {
     private lateinit var adapter: GenericFastAdapter
     private var itemAdapter: GenericItemAdapter = items()
 
@@ -23,7 +24,7 @@ class SettingsController : BaseController<PreferencesLayoutBinding>() {
         return binding.root
     }
 
-    abstract fun getSettingsList(): List<AbstractBindingItem> 
+    abstract fun getSettingsList(): List<AbstractItem> 
 
     override fun onViewCreated(view: View) {
         super.onViewCreated(view)

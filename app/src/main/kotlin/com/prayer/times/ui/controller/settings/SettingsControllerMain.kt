@@ -22,7 +22,7 @@ class SettingsControllerMain : SettingsController() {
             R.drawable.ic_relocate_24dp,
             this
         ),
-        SettintsItemMain(
+        SettingsItemMain(
             resources!!.getString(R.string.settings_about),
             R.drawable.ic_about_24dp,
             this

@@ -12,6 +12,7 @@ import com.prayer.times.ui.controller.base.BaseController
 data class SettingsItemMain(
     val name: String,
     val icon: Int,
+    val size: Float,
     val controller: BaseController<*>
 ) : AbstractItem<SettingsItemMain.ViewHolder>() {
 
@@ -31,6 +32,7 @@ data class SettingsItemMain(
         override fun bindView(item: SettingsItemMain, payloads: List<Any>) {
             summary.visibility = View.GONE
             icon.setImageResource(item.icon)
+            name.setTextSize(size)
             name.text = item.name
         }
 

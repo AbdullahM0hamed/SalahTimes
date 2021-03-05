@@ -8,7 +8,7 @@ class SettingsControllerMain : SettingsController() {
     override fun getSettingsList() {
         val size = 16 * resources!!.getDisplayMetrics().scaledDensity
         
-        return listOf(
+        val settingsList = listOf(
             SettingsItemMain(
                 resources!!.getString(R.string.settings_general),
                 R.drawable.ic_general_24dp,
@@ -34,5 +34,7 @@ class SettingsControllerMain : SettingsController() {
                 this
             )
         )
+
+        return settingsList
     }
 }

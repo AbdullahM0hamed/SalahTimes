@@ -1,6 +1,7 @@
 package com.prayer.times.ui.controller.settings
 
 import android.content.res.Resources
+import android.util.TypedValue
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -17,7 +18,7 @@ data class SettingsItemMain(
     val controller: BaseController<*>
 ) : AbstractItem<SettingsItemMain.ViewHolder>() {
 
-    public val size = 16 * resources!!.getDisplayMetrics().scaledDensity
+    public val size = 16 / resources!!.getDisplayMetrics().density
 
     override val type: Int
         get() = R.id.settings_item_main
@@ -35,7 +36,7 @@ data class SettingsItemMain(
         override fun bindView(item: SettingsItemMain, payloads: List<Any>) {
             summary.visibility = View.GONE
             icon.setImageResource(item.icon)
-            name.setTextSize(item.size)
+            name.setTextSize(TypedValue.COMPLEX_UNIT_SP, item.size)
             name.text = item.name
         }
 

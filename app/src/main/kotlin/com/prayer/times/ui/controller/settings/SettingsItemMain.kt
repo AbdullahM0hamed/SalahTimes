@@ -1,5 +1,6 @@
 package com.prayer.times.ui.controller.settings
 
+import android.content.res.Resources
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -12,9 +13,11 @@ import com.prayer.times.ui.controller.base.BaseController
 data class SettingsItemMain(
     val name: String,
     val icon: Int,
-    val size: Float,
+    val resources: Resources?,
     val controller: BaseController<*>
 ) : AbstractItem<SettingsItemMain.ViewHolder>() {
+
+    public val size = 16 * resources!!.getDisplayMetrics().scaledDensity
 
     override val type: Int
         get() = R.id.settings_item_main

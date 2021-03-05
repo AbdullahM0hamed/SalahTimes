@@ -32,7 +32,7 @@ data class SettingsItemMain(
         override fun bindView(item: SettingsItemMain, payloads: List<Any>) {
             summary.visibility = View.GONE
             icon.setImageResource(item.icon)
-            name.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16)
+            name.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16f)
             name.text = item.name
         }
 

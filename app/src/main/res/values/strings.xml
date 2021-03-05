@@ -40,4 +40,7 @@
     <string name="notification_description">Adhan and pop up on screen</string>
 
     <string name="settings_general">General</string>
+    <string name="settings_themes">Theme</string>
+    <string name="settings_relocate">Locate</string>
+    <string name="settings_about">About</string>
 </resources>

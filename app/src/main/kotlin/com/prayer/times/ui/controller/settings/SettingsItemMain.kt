@@ -26,7 +26,7 @@ data class SettingsItemMain(
     class ViewHolder(view: View) : FastAdapter.ViewHolder<SettingsItemMain>(view) {
         var icon: ImageView = view.findViewById(android.R.id.icon)
         var name: TextView = view.findViewById(android.R.id.title)
-        var summary: TextView = viewmfindViewById(android.R.id.summary)
+        var summary: TextView = view.findViewById(android.R.id.summary)
 
         override fun bindView(item: SettingsItemMain, payloads: List<Any>) {
             summary.visibility = View.GONE

@@ -14,7 +14,7 @@
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/settings_item_icon"
+        app:layout_constraintStart_toEndOf="@+id/icon"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
@@ -24,7 +24,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginBottom="15dp"
         android:layout_marginTop="15dp"
-        app:tint="@android:color/white"
+        app:tint="@android:color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

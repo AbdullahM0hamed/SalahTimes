@@ -17,8 +17,8 @@ data class SettingsItemMain(
     override val type: Int = R.id.settings_item_main
     
     override fun bindView(binding: SettingsItemBinding, payloads: List<Any>) {
-        binding.icon.setImageResource(item.icon)
-        binding.name.text = item.name
+        binding.icon.setImageResource(icon)
+        binding.name.text = name
     }
 
     override fun createBinding(

@@ -16,7 +16,6 @@ allprojects {
     repositories {
         google()
         jcenter()
-        maven { url "https://dl.bintray.com/batoulapps/adhan" }
         maven { url 'https://jitpack.io' }
         mavenCentral()
     }

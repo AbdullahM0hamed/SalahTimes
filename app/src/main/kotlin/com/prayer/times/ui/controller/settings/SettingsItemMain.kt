@@ -10,11 +10,11 @@ import com.prayer.times.ui.controller.base.BaseController
 
 data class SettingsItemMain(
     val name: String,
-    val icon: Int,
-    val controller: BaseController<*>
+    val icon: Int
 ) : AbstractBindingItem<SettingsItemBinding>() {
 
     override val type: Int = R.id.settings_item_main
+    lateinit var binding: SettingsItemBinding
     
     override fun bindView(binding: SettingsItemBinding, payloads: List<Any>) {
         binding.icon.setImageResource(icon)

@@ -33,7 +33,7 @@ abstract class SettingsController : BaseController<PreferencesLayoutBinding>() {
         itemAdapter.set(getSettingsList())
         adapter = FastAdapter.with(listOf(itemAdapter))
 
-        binding.recyclerView.layoutManager = LinearLayoutManager(view.context)
-        binding.recyclerView.adapter = adapter
+        binding.recycler.layoutManager = LinearLayoutManager(view.context)
+        binding.recycler.adapter = adapter
     }
 }

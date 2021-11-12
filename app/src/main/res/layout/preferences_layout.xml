@@ -9,8 +9,11 @@
         android:id="@+id/swipe_refresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-        <LinearLayout                                                             android:layout_width="match_parent"                                   android:layout_height="120dp">
+    
+    <LinearLayout
+        android:id="@+id/linear"
+        android:layout_width="match_parent"
+        android:layout_height="120dp">
 
             <ImageView                                                                android:src="@drawable/overlay"
                 android:minWidth="25px"
@@ -45,8 +48,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clipToPadding="false"
-            android:paddingTop="128dp"
-            android:paddingBottom="72dp" />
+            app:layout_constraintTop_toBottomOf="@+id/linear" />
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </FrameLayout>

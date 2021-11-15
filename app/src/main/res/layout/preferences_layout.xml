@@ -10,8 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     
-    <LinearLayout
-        android:id="@+id/linear"
+    <FrameLayout
+        android:id="@+id/frame"
         android:layout_width="match_parent"
         android:layout_height="120dp">
 
@@ -41,7 +41,7 @@
                 android:textColor="@android:color/white"
                 android:id="@+id/textView3"/>
 
-        </LinearLayout>
+        </FrameLayout>
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler"
             android:layout_width="match_parent"

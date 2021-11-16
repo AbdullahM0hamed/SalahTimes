@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     
-    <!-- <FrameLayout
+    <FrameLayout
         android:id="@+id/frame"
         android:layout_width="match_parent"
         android:layout_height="120dp">
@@ -43,7 +43,7 @@
                 android:textColor="@android:color/white"
                 android:id="@+id/textView3"/>
 
-</FrameLayout> -->
+        </FrameLayout>
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler"
             android:layout_width="match_parent"

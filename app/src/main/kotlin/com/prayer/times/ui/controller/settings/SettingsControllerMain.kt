@@ -6,6 +6,7 @@ import com.prayer.times.ui.controller.base.SettingsController
 class SettingsControllerMain : SettingsController() {
 
     override fun getSettingsList() = listOf(
+        SettingsItemMain(header=true),
         SettingsItemMain(
             resources!!.getString(R.string.settings_general),
             R.drawable.ic_general_24dp

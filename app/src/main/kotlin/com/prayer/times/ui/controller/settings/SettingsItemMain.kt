@@ -21,8 +21,8 @@ data class SettingsItemMain(
     
     override fun bindView(binding: ViewBinding, payloads: List<Any>) {
         if (!header) {
-            itemBinding?.icon.setImageResource(icon!!)
-            itemBinding?.name.text = name
+            itemBinding?.icon?.setImageResource(icon!!)
+            itemBinding?.name?.text = name
         }
     }
 

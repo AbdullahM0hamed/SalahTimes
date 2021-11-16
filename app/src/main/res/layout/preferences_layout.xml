@@ -6,12 +6,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-<!-- <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipe_refresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     
-    <FrameLayout
+    <!-- <FrameLayout
         android:id="@+id/frame"
         android:layout_width="match_parent"
         android:layout_height="120dp">
@@ -50,5 +50,5 @@
             android:layout_height="wrap_content"
             android:clipToPadding="false" />
 
-   <!-- </androidx.swiperefreshlayout.widget.SwipeRefreshLayout> -->
+   </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </RelativeLayout>

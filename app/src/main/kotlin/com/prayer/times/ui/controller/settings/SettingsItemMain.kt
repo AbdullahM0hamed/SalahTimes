@@ -23,7 +23,7 @@ data class SettingsItemMain(
     override fun bindView(binding: ViewBinding, payloads: List<Any>) {
         if (!header) {
             itemBinding = binding as SettingsItemBinding
-            itemBinding!!.icon.setImageResource(icon)
+            itemBinding!!.icon.setImageResource(icon!!)
             itemBinding!!.name.text = name
         }
     }

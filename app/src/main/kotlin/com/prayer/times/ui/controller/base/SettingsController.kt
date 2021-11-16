@@ -41,6 +41,7 @@ abstract class SettingsController : BaseController<PreferencesLayoutBinding>() {
         if (hasHeader()) {
             val headerAdapter: GenericItemAdapter = items()
             headerAdapter.set(getHeader())
+            list.add(headerAdapter)
         }
 
         adapter = FastAdapter.with(list)

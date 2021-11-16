@@ -22,7 +22,6 @@ data class SettingsItemMain(
     
     override fun bindView(binding: ViewBinding, payloads: List<Any>) {
         if (!header) {
-            itemBinding = binding as SettingsItemBinding
             itemBinding!!.icon.setImageResource(icon!!)
             itemBinding!!.name.text = name
         }
@@ -33,9 +32,13 @@ data class SettingsItemMain(
         parent: ViewGroup?
     ): ViewBinding {
         if (header) {
-            return HeaderBinding.inflate(inflater, parent, false)
+            headerBinding =
+                HeaderBinding.inflate(inflater, parent, false)
+            return headerBinding!!
         }
-
-        return SettingsItemBinding.inflate(inflater, parent, false)
+        
+        itemBinding =
+            SettingsItemBinding.inflate(inflater, parent, false)
+        return itemBinding!!
     }
 }

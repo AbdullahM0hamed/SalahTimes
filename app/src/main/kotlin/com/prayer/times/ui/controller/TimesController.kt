@@ -90,12 +90,8 @@ class TimesController : BaseController<TimesLayoutBinding>() {
 
         val times = calculator.getPrayerTimes(state?.date)
 
-        val timeBindings = listOf(binding.fajrStart, binding.sunriseStart, binding.dhuhrStart, binding.asrStart, binding.maghribStart, binding.ishaStart, binding.midnightStart)
-        val cal = Calendar.getInstance()
-        cal.setTime(state?.date)
-        cal.add(Calendar.DATE, 1)
-
-        val timeDates = listOf(times.fajr, times.sunrise, times.dhuhr, times.asr, times.maghrib, times.isha, Date((times.maghrib.time + cal.time.time) / 2))
+        val timeBindings = listOf(binding.fajrStart, binding.sunriseStart, binding.dhuhrStart, binding.asrStart, binding.maghribStart, binding.ishaStart)
+        val timeDates = listOf(times.fajr, times.sunrise, times.dhuhr, times.asr, times.maghrib, times.isha)
 
         timeBindings.zip(timeDates) { view, time ->
             view.text = timeFormatter.format(time)

@@ -7,6 +7,7 @@
     <string name="asr">Asr</string>
     <string name="maghrib">Maghrib</string>
     <string name="isha">Isha</string>
+    <string name="midnight">Midnight</string>
     <string name="salah_times">Salah Times</string>
     <string name="qiblah_string">Qiblah</string>
     <string name="settings_string">Settings</string>

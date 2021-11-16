@@ -26,7 +26,7 @@ data class SettingsItemMain(
     override fun createBinding(
         inflater: LayoutInflater,
         parent: ViewGroup?
-    ): ViewBinding {
+    ): SettingsItemBinding {
         return SettingsItemBinding.inflate(inflater, parent, false)
     }
 }

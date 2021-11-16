@@ -30,7 +30,7 @@ abstract class SettingsController : BaseController<PreferencesLayoutBinding>() {
 
     private fun hasHeader() = false
 
-    private fun getHeader() = listOf(Header())
+    open fun getHeader() = listOf(Header())
 
     override fun onViewCreated(view: View) {
         super.onViewCreated(view)
@@ -39,7 +39,7 @@ abstract class SettingsController : BaseController<PreferencesLayoutBinding>() {
 
         val list = mutableListOf(itemAdapter)
         if (hasHeader()) {
-            val headerAdapter = items()
+            val headerAdapter: GenericItemAdapter = items()
             headerAdapter.set(getHeader())
         }
 

@@ -28,9 +28,9 @@ abstract class SettingsController : BaseController<PreferencesLayoutBinding>() {
 
     abstract fun getSettingsList(): List<AbstractBindingItem<*>> 
 
-    private fun hasHeader() = false
+    open fun hasHeader() = false
 
-    open fun getHeader() = listOf(Header())
+    private fun getHeader() = listOf(Header())
 
     override fun onViewCreated(view: View) {
         super.onViewCreated(view)

@@ -17,13 +17,14 @@ data class SettingsItemMain(
 ) : AbstractBindingItem<ViewBinding>() {
 
     override val type: Int = R.id.settings_item_main
-    private var binding: SettingsItemBinding? = null
+    private var itemBinding: SettingsItemBinding? = null
     private var headerBinding: HeaderBinding? = null
     
     override fun bindView(binding: ViewBinding, payloads: List<Any>) {
         if (!header) {
-            binding.icon.setImageResource(icon)
-            binding.name.text = name
+            itemBinding = binding as SettingsItemBinding
+            itemBinding!!.icon.setImageResource(icon)
+            itemBinding!!.name.text = name
         }
     }
 

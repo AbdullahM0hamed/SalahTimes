@@ -18,12 +18,11 @@ data class SettingsItemMain(
 
     override val type: Int = R.id.settings_item_main
     private var itemBinding: SettingsItemBinding? = null
-    private var headerBinding: HeaderBinding? = null
     
     override fun bindView(binding: ViewBinding, payloads: List<Any>) {
         if (!header) {
-            itemBinding!!.icon.setImageResource(icon!!)
-            itemBinding!!.name.text = name
+            itemBinding?.icon.setImageResource(icon!!)
+            itemBinding?.name.text = name
         }
     }
 
@@ -32,9 +31,7 @@ data class SettingsItemMain(
         parent: ViewGroup?
     ): ViewBinding {
         if (header) {
-            headerBinding =
-                HeaderBinding.inflate(inflater, parent, false)
-            return headerBinding!!
+            return HeaderBinding.inflate(inflater, parent, false)
         }
         
         itemBinding =

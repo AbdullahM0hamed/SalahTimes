@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.prayer.times.databinding.HeaderBinding
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.GenericFastAdapter
 import com.mikepenz.fastadapter.adapters.GenericItemAdapter
@@ -27,11 +28,22 @@ abstract class SettingsController : BaseController<PreferencesLayoutBinding>() {
 
     abstract fun getSettingsList(): List<AbstractBindingItem<*>> 
 
+    private fun hasHeader() = false
+
+    private fun getHeader() = listOf(Header())
+
     override fun onViewCreated(view: View) {
         super.onViewCreated(view)
         
         itemAdapter.set(getSettingsList())
-        adapter = FastAdapter.with(listOf(itemAdapter))
+
+        val list = mutableListOf(itemAdapter)
+        if (hasHeader()) {
+            val headerAdapter = items()
+            headerAdapter.set(getHeader())
+        }
+
+        adapter = FastAdapter.with(list)
 
         binding.recycler.layoutManager = LinearLayoutManager(view.context)
         binding.recycler.adapter = adapter

@@ -44,8 +44,7 @@ abstract class SettingsController : BaseController<PreferencesLayoutBinding>() {
             list.add(headerAdapter)
         }
 
-        adapter = FastAdapter.with(list)
-
+        adapter = FastAdapter.with(list.reversed())
         binding.recycler.layoutManager = LinearLayoutManager(view.context)
         binding.recycler.adapter = adapter
     }

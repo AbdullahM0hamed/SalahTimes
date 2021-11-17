@@ -51,7 +51,11 @@ class MainActivity :
         }
 
 
-        locateMe()
+        if (!isLocationStored()) {
+            locateMe()
+        } else {
+            Calculation(this).setNextPrayerAlarm()
+        }
 
         binding = MainActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -127,17 +131,13 @@ class MainActivity :
     override fun onProviderDisabled(provider: String) {}
 
     public fun locateMe() {
-        if (!isLocationStored()) {
-            if (!Location.hasPermission(this)) {
-                Dexter.withContext(this)
-                    .withPermission(ACCESS_FINE_LOCATION)
-                    .withListener(this)
-                    .check()
-            } else {
-                Location.getLocation(this)
-            }
+        if (!Location.hasPermission(this)) {
+            Dexter.withContext(this)
+                .withPermission(ACCESS_FINE_LOCATION)
+                .withListener(this)
+                .check()
         } else {
-            Calculation(this).setNextPrayerAlarm()
+            Location.getLocation(this)
         }
     }
 

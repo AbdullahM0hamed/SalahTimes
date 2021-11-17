@@ -10,7 +10,8 @@ import com.prayer.times.ui.controller.base.BaseController
 
 data class SettingsItemMain(
     val name: String,
-    val icon: Int
+    val icon: Int,
+    val onClick: Function0<Unit> = {}
 ) : AbstractBindingItem<SettingsItemBinding>() {
 
     override val type: Int = R.id.settings_item_main
@@ -19,6 +20,7 @@ data class SettingsItemMain(
         binding: SettingsItemBinding,
         payloads: List<Any>
     ) {
+        binding.root.setOnClickListener { onClick() }
         binding.icon.setImageResource(icon)
         binding.name.text = name
     }

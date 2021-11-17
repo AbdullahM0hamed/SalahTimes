@@ -51,18 +51,7 @@ class MainActivity :
         }
 
 
-        if (!isLocationStored()) {
-            if (!Location.hasPermission(this)) {
-                Dexter.withContext(this)
-                    .withPermission(ACCESS_FINE_LOCATION)
-                    .withListener(this)
-                    .check()
-            } else {
-                Location.getLocation(this)
-            }
-        } else {
-            Calculation(this).setNextPrayerAlarm()
-        }
+        locateMe()
 
         binding = MainActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -136,6 +125,21 @@ class MainActivity :
     override fun onStatusChanged(provider: String?, status: Int, extra: Bundle?) {}
     override fun onProviderEnabled(provider: String) {}
     override fun onProviderDisabled(provider: String) {}
+
+    public fun locateMe() {
+        if (!isLocationStored()) {
+            if (!Location.hasPermission(this)) {
+                Dexter.withContext(this)
+                    .withPermission(ACCESS_FINE_LOCATION)
+                    .withListener(this)
+                    .check()
+            } else {
+                Location.getLocation(this)
+            }
+        } else {
+            Calculation(this).setNextPrayerAlarm()
+        }
+    }
 
     fun setRoot(controller: BaseController<*>) {
         router.setRoot(RouterTransaction.with(controller))

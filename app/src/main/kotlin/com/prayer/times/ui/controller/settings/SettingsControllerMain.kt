@@ -1,6 +1,7 @@
 package com.prayer.times.ui.controller.settings
 
 import com.prayer.times.R
+import com.prayer.times.ui.MainActivity
 import com.prayer.times.ui.controller.base.SettingsController
 
 class SettingsControllerMain : SettingsController() {
@@ -17,7 +18,8 @@ class SettingsControllerMain : SettingsController() {
         ),
         SettingsItemMain(
             resources!!.getString(R.string.settings_relocate),
-            R.drawable.ic_relocate_24dp
+            R.drawable.ic_relocate_24dp,
+            (activity as!! MainActivity)::locateMe
         ),
         SettingsItemMain(
             resources!!.getString(R.string.settings_about),

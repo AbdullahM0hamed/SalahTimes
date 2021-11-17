@@ -19,7 +19,7 @@ class SettingsControllerMain : SettingsController() {
         SettingsItemMain(
             resources!!.getString(R.string.settings_relocate),
             R.drawable.ic_relocate_24dp,
-            (activity as!! MainActivity)::locateMe
+            (activity as? MainActivity)::locateMe
         ),
         SettingsItemMain(
             resources!!.getString(R.string.settings_about),

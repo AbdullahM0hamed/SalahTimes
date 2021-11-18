@@ -7,7 +7,9 @@ import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Build
 import android.provider.Settings
+import android.widget.Toast
 import com.prayer.times.Constants
+import com.prayer.times.R
 import com.prayer.times.calculation.Calculation
 import com.prayer.times.preference.PreferencesHelper
 import com.prayer.times.ui.MainActivity
@@ -49,6 +51,8 @@ class Location {
 
             helper.putString(Constants.LATITUDE, latitude.toString())
             helper.putString(Constants.LONGITUDE, longitude.toString())
+
+            Toast.makeText(context, R.string.location_updated, 5).show()
             mainStore.dispatch(UpdateTimes())
             Calculation(context).setNextPrayerAlarm()
         }

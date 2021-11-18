@@ -1,5 +1,7 @@
 package com.prayer.times.ui.controller.settings
 
+import android.content.Context
+import android.widget.Toast
 import com.prayer.times.R
 import com.prayer.times.ui.MainActivity
 import com.prayer.times.ui.controller.base.SettingsController
@@ -20,7 +22,6 @@ class SettingsControllerMain : SettingsController() {
             resources!!.getString(R.string.settings_relocate),
             R.drawable.ic_relocate_24dp,
             { 
-                android.widget.Toast.makeText(activity as android.content.Context, "Code runs", 5).show()
                 (activity as? MainActivity)?.locateMe()
             }
         ),

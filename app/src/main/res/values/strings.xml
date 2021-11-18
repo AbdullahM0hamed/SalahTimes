@@ -43,4 +43,6 @@
     <string name="settings_themes">Theme</string>
     <string name="settings_relocate">Locate</string>
     <string name="settings_about">About</string>
+
+    <string name="location_updated">Location updated!</string>
 </resources>

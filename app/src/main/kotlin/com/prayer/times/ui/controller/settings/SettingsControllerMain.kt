@@ -19,7 +19,10 @@ class SettingsControllerMain : SettingsController() {
         SettingsItemMain(
             resources!!.getString(R.string.settings_relocate),
             R.drawable.ic_relocate_24dp,
-            { (activity as? MainActivity)?.locateMe() }
+            { 
+                android.widget.Toast.makeText(activity as android.content.Context, "Code runs", 5).show()
+                (activity as? MainActivity)?.locateMe()
+            }
         ),
         SettingsItemMain(
             resources!!.getString(R.string.settings_about),

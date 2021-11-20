@@ -8,7 +8,7 @@ import com.prayer.times.R
 import com.prayer.times.databinding.GeneralItemBinding
 import com.prayer.times.ui.controller.base.BaseController
 
-data class GeneralItemMain(
+data class GeneralItem(
     val name: String,
     val desc: String,
     val onClick: Function0<Unit> = {}

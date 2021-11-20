@@ -1,4 +1,4 @@
-package com.prayer.times.ui.controller.setting
+package com.prayer.times.ui.controller.settings
 
 import com.prayer.times.R
 import com.prayer.times.ui.controller.base.SettingsController

@@ -12,7 +12,7 @@ class SettingsControllerMain : SettingsController() {
         SettingsItemMain(
             resources!!.getString(R.string.settings_general),
             R.drawable.ic_general_24dp,
-            { this.router.pushController(RouterTransaction.with(GeneralController)) }
+            { this.router.pushController(RouterTransaction.with(GeneralController())) }
         ),
         SettingsItemMain(
             resources!!.getString(R.string.settings_themes),

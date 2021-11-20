@@ -45,4 +45,7 @@
     <string name="settings_about">About</string>
 
     <string name="location_updated">Location updated!</string>
+
+    <string name="language_title">Language</string>
+    <string name="language_default">System default</string>
 </resources>

@@ -179,17 +179,9 @@
 			android:gravity="start"/>
 
 		    <View
-			android:layout_height="0dp"
-			android:layout_width="30sp" />
-
-		    <View
 			android:background="@drawable/icon_fajr"
                         android:layout_height="wrap_content"
-                        android:layout_width="30sp" />
-
-		    <View
-                        android:layout_height="0dp"
-			android:layout_width="30sp" />
+                        android:layout_width="wrap_content" />
 
 		    <TextView
 			android:layout_width="wrap_content"
@@ -213,17 +205,9 @@
 			android:gravity="start" />
 
 		    <View
-			android:layout_height="0dp"
-			android:layout_width="30sp" />
-
-		    <View
 			android:background="@drawable/icon_sunrise"
                         android:layout_height="wrap_content"
-			android:layout_width="30sp" />
-
-		    <View
-                        android:layout_height="0dp"
-			android:layout_width="30sp" />
+			android:layout_width="wrap_content" />
 
 		    <TextView
 			android:layout_width="wrap_content"
@@ -247,17 +231,9 @@
 			android:gravity="start" />
 
 		    <View
-			android:layout_height="0dp"
-			android:layout_width="30sp" />
-
-		    <View
 			android:background="@drawable/icon_dhuhr"
                         android:layout_height="wrap_content"
-			android:layout_width="30sp" />
-
-		    <View
-                        android:layout_height="0dp"
-			android:layout_width="30sp" />
+			android:layout_width="wrap_content" />
 
 		    <TextView
 			android:layout_width="wrap_content"
@@ -281,17 +257,9 @@
 			android:gravity="start" />
 
 		    <View
-			android:layout_height="0dp"
-			android:layout_width="30sp" />
-
-		    <View
 			android:background="@drawable/icon_asr"
                         android:layout_height="wrap_content"
-			android:layout_width="30sp" />
-
-		    <View
-                        android:layout_height="0dp"
-			android:layout_width="30sp" />
+			android:layout_width="wrap_content" />
 
 		    <TextView
 			android:layout_width="wrap_content"
@@ -315,17 +283,9 @@
 			android:gravity="start" />
 
 		    <View
-			android:layout_height="0dp"
-			android:layout_width="30sp" />
-
-		    <View
 			android:background="@drawable/icon_maghrib"
-                        android:layout_height="0dp"
-			android:layout_width="30sp" />
-
-		    <View
-                        android:layout_height="0dp"
-			android:layout_width="30sp" />
+                        android:layout_height="wrap_content"
+			android:layout_width="wrap_content" />
 
 		    <TextView
 			android:layout_width="wrap_content"
@@ -349,17 +309,9 @@
 			android:gravity="start" />
 
 		    <View
-			android:layout_height="0dp"
-			android:layout_width="30sp" />
-
-		    <View
 			android:background="@drawable/icon_isha"
-                        android:layout_height="0dp"
-			android:layout_width="30sp" />
-
-		    <View
-                        android:layout_height="0dp"
-			android:layout_width="30sp" />
+                        android:layout_height="wrap_content"
+			android:layout_width="wrap_content" />
 
 		    <TextView
 			android:layout_width="wrap_content"
@@ -384,7 +336,7 @@
 
 		    <View
 			android:layout_height="0dp"
-			android:layout_width="90sp" />
+			android:layout_width="30sp" />
 		    
 		    <TextView
 			android:layout_width="wrap_content"

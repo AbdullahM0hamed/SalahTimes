@@ -10,6 +10,18 @@ class GeneralController : SettingsController() {
             resources!!.getString(R.string.language_title),
             resources!!.getString(R.string.language_default),
             { android.widget.Toast.makeText(activity as android.content.Context, "Test", 5).show() }
+        ),
+        GeneralItem(
+            resources!!.getString(R.string.calculation_method),
+            resources!!.getString(R.string.moonsighting)
+        ),
+        GeneralItem(
+            resources!!.getString(R.string.madhab),
+            resources!!.getString(R.string.shafi)
+        ),
+        GeneralItem(
+            resources!!.getString(R.string.time_format),
+            resources!!.getString(R.string.military_time)
         )
     )
 }

@@ -5,6 +5,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.batoulapps.adhan.SunnahTimes
 import com.github.msarhan.ummalqura.calendar.UmmalquraCalendar
 import com.prayer.times.R
 import com.prayer.times.calculation.Calculation
@@ -90,8 +91,8 @@ class TimesController : BaseController<TimesLayoutBinding>() {
 
         val times = calculator.getPrayerTimes(state?.date)
 
-        val timeBindings = listOf(binding.fajrStart, binding.sunriseStart, binding.dhuhrStart, binding.asrStart, binding.maghribStart, binding.ishaStart)
-        val timeDates = listOf(times.fajr, times.sunrise, times.dhuhr, times.asr, times.maghrib, times.isha)
+        val timeBindings = listOf(binding.fajrStart, binding.sunriseStart, binding.dhuhrStart, binding.asrStart, binding.maghribStart, binding.ishaStart, binding.midnightStart)
+        val timeDates = listOf(times.fajr, times.sunrise, times.dhuhr, times.asr, times.maghrib, times.isha, SunnahTimes(times).middleOfTheNight)
 
         timeBindings.zip(timeDates) { view, time ->
             view.text = timeFormatter.format(time)

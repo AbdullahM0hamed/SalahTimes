@@ -128,228 +128,234 @@
 		android:ellipsize="end"
 		android:layout_gravity="center_horizontal"
 		android:id="@+id/nextPrayer"/>
-	    
-	    <TableLayout
+
+	    <HorizontalScrollView
 		android:layout_width="wrap_content"
-		android:layout_height="match_parent"
-		android:layout_marginTop="20dp"
-		android:layout_marginRight="20dp"
-		android:layout_marginLeft="20dp"
-		android:layout_gravity="center">
-
-	        <TableRow
-		    android:layout_width="match_parent"
-		    android:layout_height="wrap_content"
-		    android:layout_marginBottom="10dp">
-
-		    <TextView
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:textSize="35sp"
-			android:text="@string/prayer_heading"
-			android:lines="1"
-			android:ellipsize="end"
-			android:gravity="start"/>
-
-		    <View
-			android:layout_height="0dp"
-			android:layout_width="30sp" />
-	    
-		    
-		    <TextView
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:textSize="35sp"
-			android:lines="1"
-			android:ellipsize="end"
-			android:gravity="center_horizontal"
-			android:text="@string/start_heading"/>
-
-		</TableRow>
+		android:layout_height="match_parent">
 	
-		<TableRow
+	        <TableLayout
 		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content">
+		    android:layout_height="match_parent"
+		    android:layout_marginTop="20dp"
+		    android:layout_marginRight="20dp"
+		    android:layout_marginLeft="20dp"
+		    android:layout_gravity="center">
 
-		    <TextView
-			android:drawableEnd="@drawable/icon_fajr"
-			android:layout_width="wrap_content"
+		    <TableRow
+			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:textSize="@dimen/timing"
-			android:text="@string/fajr"
-			android:gravity="start"/>
+			android:layout_marginBottom="10dp">
 
-		    <View
-                        android:layout_height="0sp"
-                        android:layout_width="30sp" />
+		        <TextView
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:textSize="35sp"
+			    android:text="@string/prayer_heading"
+			    android:lines="1"
+			    android:ellipsize="end"
+			    android:gravity="start"/>
 
-		    <TextView
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:textSize="@dimen/timing"
-			android:gravity="center_horizontal"
-			android:text="00:00"
-			android:id="@+id/fajr_start" />
+			<View
+			    android:layout_height="0dp"
+			    android:layout_width="30sp" />
 
-		</TableRow>
+		        <TextView
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:textSize="35sp"
+			    android:lines="1"
+			    android:ellipsize="end"
+			    android:gravity="center_horizontal"
+			    android:text="@string/start_heading"/>
 
-		<TableRow
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content">
-
-		    <TextView
-			android:drawableEnd="@drawable/icon_sunrise"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:textSize="@dimen/timing"
-			android:text="@string/sunrise"
-			android:gravity="start" />
-
-		    <View
-                        android:layout_height="0sp"
-			android:layout_width="30sp" />
-
-		    <TextView
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:textSize="@dimen/timing"
-			android:gravity="center_horizontal"
-			android:text="00:00"
-			android:id="@+id/sunrise_start"/>
-
-		</TableRow>
+		    </TableRow>
 	
-		<TableRow
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content">
-
-		    <TextView
-			android:drawableEnd="@drawable/icon_dhuhr"
+		    <TableRow
 			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:textSize="@dimen/timing"
-			android:text="@string/dhuhr"
-			android:gravity="start" />
+			android:layout_height="wrap_content">
 
-		    <View
-                        android:layout_height="0sp"
-			android:layout_width="30sp" />
+		        <TextView
+			    android:drawableEnd="@drawable/icon_fajr"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:textSize="@dimen/timing"
+			    android:text="@string/fajr"
+			    android:gravity="start"/>
 
-		    <TextView
+		        <View
+			    android:layout_height="0sp"
+			    android:layout_width="30sp" />
+
+		        <TextView
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:textSize="@dimen/timing"
+			    android:gravity="center_horizontal"
+			    android:text="00:00"
+			    android:id="@+id/fajr_start" />
+
+		    </TableRow>
+
+		    <TableRow
 			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:textSize="@dimen/timing"
-			android:gravity="center_horizontal"
-			android:text="00:00"
-			android:id="@+id/dhuhr_start"/>
+			android:layout_height="wrap_content">
 
-		</TableRow>
+		        <TextView
+			    android:drawableEnd="@drawable/icon_sunrise"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:textSize="@dimen/timing"
+			    android:text="@string/sunrise"
+			    android:gravity="start" />
 
-		<TableRow
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content">
+		        <View
+			    android:layout_height="0sp"
+			    android:layout_width="30sp" />
 
-		    <TextView
-			android:drawableEnd="@drawable/icon_asr"
+		        <TextView
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:textSize="@dimen/timing"
+			    android:gravity="center_horizontal"
+			    android:text="00:00"
+			    android:id="@+id/sunrise_start"/>
+
+		    </TableRow>
+	
+		    <TableRow
 			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:textSize="@dimen/timing"
-			android:text="@string/asr"
-			android:gravity="start" />
+			android:layout_height="wrap_content">
 
-		    <View
-                        android:layout_height="0sp"
-			android:layout_width="30sp" />
+		        <TextView
+			    android:drawableEnd="@drawable/icon_dhuhr"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:textSize="@dimen/timing"
+			    android:text="@string/dhuhr"
+			    android:gravity="start" />
 
-		    <TextView
+		        <View
+			    android:layout_height="0sp"
+			    android:layout_width="30sp" />
+
+		        <TextView
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:textSize="@dimen/timing"
+			    android:gravity="center_horizontal"
+			    android:text="00:00"
+			    android:id="@+id/dhuhr_start"/>
+
+		    </TableRow>
+
+		    <TableRow
 			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:textSize="@dimen/timing"
-			android:gravity="center_horizontal"
-			android:text="00:00"
-			android:id="@+id/asr_start"/>
+			android:layout_height="wrap_content">
 
-		</TableRow>
+		        <TextView
+			    android:drawableEnd="@drawable/icon_asr"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:textSize="@dimen/timing"
+			    android:text="@string/asr"
+			    android:gravity="start" />
 
-		<TableRow
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content">
+		        <View
+			    android:layout_height="0sp"
+			    android:layout_width="30sp" />
 
-		    <TextView
-			android:drawableEnd="@drawable/icon_maghrib"
-			android:drawablePadding="10dp"
+		        <TextView
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:textSize="@dimen/timing"
+			    android:gravity="center_horizontal"
+			    android:text="00:00"
+			    android:id="@+id/asr_start"/>
+
+		    </TableRow>
+
+		    <TableRow
 			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:textSize="@dimen/timing"
-			android:text="@string/maghrib"
-			android:gravity="start" />
+			android:layout_height="wrap_content">
 
-		    <View
-                        android:layout_height="0sp"
-			android:layout_width="30sp" />
+		        <TextView
+			    android:drawableEnd="@drawable/icon_maghrib"
+			    android:drawablePadding="10dp"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:textSize="@dimen/timing"
+			    android:text="@string/maghrib"
+			    android:gravity="start" />
 
-		    <TextView
+		        <View
+			    android:layout_height="0sp"
+			    android:layout_width="30sp" />
+
+			<TextView
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:textSize="@dimen/timing"
+			    android:gravity="center_horizontal"
+			    android:text="00:00"
+			    android:id="@+id/maghrib_start"/>
+
+		    </TableRow>
+
+		    <TableRow
 			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:textSize="@dimen/timing"
-			android:gravity="center_horizontal"
-			android:text="00:00"
-			android:id="@+id/maghrib_start"/>
+			android:layout_height="wrap_content">
 
-		</TableRow>
+		        <TextView
+			    android:drawableEnd="@drawable/icon_isha"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:textSize="@dimen/timing"
+			    android:text="@string/isha"
+			    android:gravity="start" />
 
-		<TableRow
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content">
+			
+			<View
+			    android:layout_height="0sp"
+			    android:layout_width="30sp" />
 
-		    <TextView
-			android:drawableEnd="@drawable/icon_isha"
+		        <TextView
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:textSize="@dimen/timing"
+			    android:gravity="center_horizontal"
+			    android:text="00:00"
+			    android:id="@+id/isha_start"/>
+
+		    </TableRow>
+
+		    <TableRow
 			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:textSize="@dimen/timing"
-			android:text="@string/isha"
-			android:gravity="start" />
+			android:layout_height="wrap_content">
 
-		    <View
-                        android:layout_height="0sp"
-			android:layout_width="30sp" />
+		        <TextView
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:text="@string/midnight"
+			    android:textSize="@dimen/timing"
+			    android:gravity="start" />
 
-		    <TextView
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:textSize="@dimen/timing"
-			android:gravity="center_horizontal"
-			android:text="00:00"
-			android:id="@+id/isha_start"/>
-
-		</TableRow>
-
-		<TableRow
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content">
-
-		    <TextView
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:text="@string/midnight"
-			android:textSize="@dimen/timing"
-			android:gravity="start" />
-
-		    <View
-			android:layout_height="0dp"
-			android:layout_width="30sp" />
+		        <View
+			    android:layout_height="0dp"
+			    android:layout_width="30sp" />
 		    
-		    <TextView
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:text="00:00"
-			android:textSize="@dimen/timing"
-			android:gravity="center_horizontal"
-			android:id="@+id/midnight_start"/>
+		        <TextView
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:text="00:00"
+			    android:textSize="@dimen/timing"
+			    android:gravity="center_horizontal"
+			    android:id="@+id/midnight_start"/>
 
-		</TableRow>
-	    
-	    </TableLayout>
+		    </TableRow>
+
+		</TableLayout>
+
+	    </HorizontalScrollView>
 
 	</LinearLayout>
 

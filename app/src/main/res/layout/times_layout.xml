@@ -277,6 +277,7 @@
 
 		    <TextView
 			android:drawableEnd="@drawable/icon_maghrib"
+			android:drawablePadding="10dp"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:textSize="@dimen/timing"

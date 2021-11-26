@@ -49,8 +49,6 @@ abstract class SettingsController : BaseController<PreferencesLayoutBinding>() {
 
         if (hasActionBar()) {
             binding.actionBar.setVisibility(View.VISIBLE)
-            binding.actionBar.setHomeAsUpIndicator(R.drawable.ic_arrow_back_24dp)
-            binding.actionBar.setDisplayHomeAsUpEnabled(true)
         }
 
         adapter = FastAdapter.with(list.reversed())

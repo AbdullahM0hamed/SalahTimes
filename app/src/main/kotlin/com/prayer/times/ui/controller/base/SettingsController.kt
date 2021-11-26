@@ -33,6 +33,8 @@ abstract class SettingsController : BaseController<PreferencesLayoutBinding>() {
 
     open fun hasActionBar() = true
 
+    open fun getTitle(): String = ""
+
     private fun getHeader() = listOf(Header())
 
     override fun onViewCreated(view: View) {
@@ -49,6 +51,10 @@ abstract class SettingsController : BaseController<PreferencesLayoutBinding>() {
 
         if (hasActionBar()) {
             binding.actionBar.setVisibility(View.VISIBLE)
+            binding.topAppBar.title = title
+            binding.topAppBar.setNavigationOnClickListener {
+                router.handleBack()
+            }
         }
 
         adapter = FastAdapter.with(list.reversed())

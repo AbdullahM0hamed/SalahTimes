@@ -8,6 +8,7 @@ import com.prayer.times.ui.controller.base.SettingsController
 class SettingsControllerMain : SettingsController() {
 
     override fun hasHeader() = true
+    override fun hasActionBar() = false
     override fun getSettingsList() = listOf(
         SettingsItemMain(
             resources!!.getString(R.string.settings_general),

@@ -3,7 +3,8 @@
     android:width="24.000000dp"
     android:height="24.000000dp"
     android:viewportWidth="48.000000"
-    android:viewportHeight="48.000000">
+    android:viewportHeight="48.000000"
+    android:autoMirrored="true">
 
     <group
             android:translateY="48.000000"

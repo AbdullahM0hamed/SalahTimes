@@ -30,6 +30,8 @@ abstract class SettingsController : BaseController<PreferencesLayoutBinding>() {
 
     open fun hasHeader() = false
 
+    open fun hasActionBar() = true
+
     private fun getHeader() = listOf(Header())
 
     override fun onViewCreated(view: View) {
@@ -44,8 +46,13 @@ abstract class SettingsController : BaseController<PreferencesLayoutBinding>() {
             list.add(headerAdapter)
         }
 
+        if (hasActionBar()) {
+            //
+        }
+
         adapter = FastAdapter.with(list.reversed())
         binding.recycler.layoutManager = LinearLayoutManager(view.context)
         binding.recycler.adapter = adapter
+        binding.actionBar.setVisibility(View.GONE)
     }
 }

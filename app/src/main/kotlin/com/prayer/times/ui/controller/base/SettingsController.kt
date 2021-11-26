@@ -11,6 +11,7 @@ import com.mikepenz.fastadapter.GenericFastAdapter
 import com.mikepenz.fastadapter.adapters.GenericItemAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter.Companion.items
 import com.mikepenz.fastadapter.binding.AbstractBindingItem
+import com.prayer.times.R
 import com.prayer.times.databinding.PreferencesLayoutBinding
 import com.prayer.times.ui.controller.base.BaseController
 
@@ -48,6 +49,8 @@ abstract class SettingsController : BaseController<PreferencesLayoutBinding>() {
 
         if (hasActionBar()) {
             binding.actionBar.setVisibility(View.VISIBLE)
+            binding.actionBar.setHomeAsUpIndicator(R.drawable.ic_arrow_back_24dp)
+            binding.actionBar.setDisplayHomeAsUpEnabled(true)
         }
 
         adapter = FastAdapter.with(list.reversed())

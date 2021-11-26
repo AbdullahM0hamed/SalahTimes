@@ -21,6 +21,7 @@
             android:layout_width="fill_parent"
             android:layout_height="?actionBarSize"
             app:navigationIcon="@drawable/ic_arrow_back_24dp"
+            app:titleTextAppearance="@style/Toolbar.TitleText"
             app:title="@string/app_name"
             app:titleTextColor="@android:color/black"
             app:collapseIcon="@drawable/ic_arrow_back_24dp"

@@ -47,12 +47,11 @@ abstract class SettingsController : BaseController<PreferencesLayoutBinding>() {
         }
 
         if (hasActionBar()) {
-            //
+            binding.actionBar.setVisibility(View.VISIBLE)
         }
 
         adapter = FastAdapter.with(list.reversed())
         binding.recycler.layoutManager = LinearLayoutManager(view.context)
         binding.recycler.adapter = adapter
-        binding.actionBar.setVisibility(View.GONE)
     }
 }

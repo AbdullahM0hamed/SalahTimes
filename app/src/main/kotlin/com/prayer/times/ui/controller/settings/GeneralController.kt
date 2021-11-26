@@ -5,6 +5,7 @@ import com.prayer.times.ui.controller.base.SettingsController
 
 class GeneralController : SettingsController() {
 
+    override fun getHeaderTitle() = resources!!.getString(R.strings.settings_general)
     override fun getSettingsList() = listOf(
         GeneralItem(
             resources!!.getString(R.string.language_title),

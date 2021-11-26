@@ -33,7 +33,7 @@ abstract class SettingsController : BaseController<PreferencesLayoutBinding>() {
 
     open fun hasActionBar() = true
 
-    open fun getTitle(): String = ""
+    abstract fun getHeaderTitle(): String = ""
 
     private fun getHeader() = listOf(Header())
 
@@ -51,7 +51,7 @@ abstract class SettingsController : BaseController<PreferencesLayoutBinding>() {
 
         if (hasActionBar()) {
             binding.actionBar.setVisibility(View.VISIBLE)
-            binding.topAppBar.title = title
+            binding.topAppBar.title = headerTitle
             binding.topAppBar.setNavigationOnClickListener {
                 router.handleBack()
             }

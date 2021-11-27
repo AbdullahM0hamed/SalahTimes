@@ -51,7 +51,7 @@ abstract class SettingsController : BaseController<PreferencesLayoutBinding>() {
 
         if (hasActionBar()) {
             binding.actionBar.setVisibility(View.VISIBLE)
-            binding.topAppBar.title = headerTitle
+            binding.topAppBar.title = getHeaderTitle()
             binding.topAppBar.setNavigationOnClickListener {
                 router.handleBack()
             }

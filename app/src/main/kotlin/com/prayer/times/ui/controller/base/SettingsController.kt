@@ -33,7 +33,7 @@ abstract class SettingsController : BaseController<PreferencesLayoutBinding>() {
 
     open fun hasActionBar() = true
 
-    abstract fun getHeaderTitle(): String = ""
+    open fun getHeaderTitle(): String = ""
 
     private fun getHeader() = listOf(Header())
 

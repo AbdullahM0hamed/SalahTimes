@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
         android:visibility="gone"
-        app:elevation="0dp">
+        android:elevation="16dp">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/topAppBar"

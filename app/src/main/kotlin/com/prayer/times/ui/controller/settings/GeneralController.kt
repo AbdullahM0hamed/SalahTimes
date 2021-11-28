@@ -15,7 +15,7 @@ class GeneralController : SettingsController() {
                 context,
                 resources!!.getString(R.string.language_title),
                 resources!!.getString(R.string.language_summary),
-                "language"
+                "language",
                 resources!!.getString(R.string.language_default),
                 resources!!.getStringArray(R.array.languages)
             ),
@@ -23,7 +23,7 @@ class GeneralController : SettingsController() {
                 context,
                 resources!!.getString(R.string.calculation_method),
                 resources!!.getString(R.string.calculation_summary),
-                "calculation_method"
+                "calculation_method",
                 resources!!.getString(R.string.moonsighting),
                 resources!!.getStringArray(R.array.madaahib)
             ),

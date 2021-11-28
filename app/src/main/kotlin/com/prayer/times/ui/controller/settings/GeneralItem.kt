@@ -36,7 +36,9 @@ data class GeneralItem(
             builder.setSingleChoiceItems(
                 options,
                 options.indexOf(getValue()).let { if (it == -1) default else it }
-            ) { dialog, i -> }
+            ) { dialog, i ->
+                dialog.dismiss()
+            }
             builder.setPositiveButton(R.string.ok) { dialog, which ->
                 val position = (dialog as AlertDialog).listView.checkedItemPosition
                 helper.putString(options[position])

@@ -37,4 +37,7 @@
     <item>24_hour_time</item>
     <item>12_hour_time</item>
 </string-array>
+<string-array name="languages">
+    <item>English</string>
+</string-array>
 </resources>

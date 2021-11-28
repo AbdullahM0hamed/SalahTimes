@@ -10,6 +10,7 @@
     <string name="salah_times">Salah Times</string>
     <string name="qiblah_string">Qiblah</string>
     <string name="settings_string">Settings</string>
+    <string name="language_summary">Select the language to display the app in</string>
     <string name="calculation_method">Calculation Method</string>
     <string name="calculation_summary">Select method to use for prayer time calculations</string>
     <string name="madhab">Madhab</string>
@@ -49,4 +50,6 @@
 
     <string name="language_title">Language</string>
     <string name="language_default">System default</string>
+
+    <string name="ok">OK</string>
 </resources>

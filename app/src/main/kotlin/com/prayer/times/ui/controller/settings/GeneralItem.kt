@@ -20,7 +20,7 @@ data class GeneralItem(
     val options: Array<String>
 ) : AbstractBindingItem<GeneralItemBinding>() {
 
-    override val type: Int = R.id.general_item_mai
+    override val type: Int = R.id.general_item_main
     val helper = PreferencesHelper(context)
     
     override fun bindView(
@@ -36,7 +36,7 @@ data class GeneralItem(
             builder.setSingleChoiceItems(
                 options,
                 options.indexOf(getValue()).let { if (it == -1) default else it }
-            )
+            ) { _, _, -> }
             builder.setPositiveButton(R.string.ok) { dialog, which ->
                 val position = (dialog as AlertDialog).listView.checkedItemPosition
                 helper.putString(options[position])

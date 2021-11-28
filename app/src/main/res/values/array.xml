@@ -38,6 +38,6 @@
     <item>12_hour_time</item>
 </string-array>
 <string-array name="languages">
-    <item>English</string>
+    <item>English</item>
 </string-array>
 </resources>

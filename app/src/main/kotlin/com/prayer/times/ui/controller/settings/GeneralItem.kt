@@ -17,7 +17,7 @@ data class GeneralItem(
     val desc: String,
     val key: String,
     val default: String,
-    val options: Array<String>
+    val options: Array<CharSequence>
 ) : AbstractBindingItem<GeneralItemBinding>() {
 
     override val type: Int = R.id.general_item_main

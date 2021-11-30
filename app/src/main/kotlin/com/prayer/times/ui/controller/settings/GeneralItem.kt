@@ -35,7 +35,7 @@ data class GeneralItem(
             builder.setMessage(desc)
             builder.setSingleChoiceItems(
                 options.map { it }.toTypedArray<CharSequence>(),
-                options.indexOf(getValue())
+                0
             ) { dialog, i ->
                 dialog.dismiss()
             }

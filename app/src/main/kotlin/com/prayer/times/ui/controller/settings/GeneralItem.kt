@@ -31,8 +31,7 @@ data class GeneralItem(
         binding.summary.text = default
         binding.root.setOnClickListener {
             val builder = AlertDialog.Builder(context)
-            builder.setTitle(name)
-            builder.setMessage(desc)
+            builder.setTitle(desc)
             builder.setSingleChoiceItems(
                 options.map { it }.toTypedArray<CharSequence>(),
                 0

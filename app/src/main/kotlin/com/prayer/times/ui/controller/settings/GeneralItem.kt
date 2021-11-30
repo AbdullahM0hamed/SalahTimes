@@ -29,13 +29,13 @@ data class GeneralItem(
         payloads: List<Any>
     ) {
         binding.title.text = name
-        binding.summary.text = default
+        binding.summary.text = helper.getString(key) ?: default
         binding.root.setOnClickListener {
             val builder = AlertDialog.Builder(context)
             builder.setTitle(desc)
             builder.setSingleChoiceItems(
                 options.map { it }.toTypedArray<CharSequence>(),
-                0
+                getPosition()
             ) { dialog, i -> }
             builder.setPositiveButton(R.string.ok) { dialog, which ->
                 val position = (dialog as AlertDialog).listView.checkedItemPosition

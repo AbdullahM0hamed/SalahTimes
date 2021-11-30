@@ -41,7 +41,7 @@ data class GeneralItem(
             }
             builder.setPositiveButton(R.string.ok) { dialog, which ->
                 val position = (dialog as AlertDialog).listView.checkedItemPosition
-                helper.putString(options[position])
+                helper.putString(options[position], "placeholder")
             }
 
             val dialog = builder.create()

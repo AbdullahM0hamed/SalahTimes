@@ -35,7 +35,7 @@ data class GeneralItem(
             builder.setMessage(desc)
             builder.setSingleChoiceItems(
                 options.map { it }.toTypedArray(),
-                options.indexOf(getValue()).let { if (it == -1) default else it }
+                options.map { it }.indexOf(getValue()).let { if (it == -1) default else it }
             ) { dialog, i ->
                 dialog.dismiss()
             }

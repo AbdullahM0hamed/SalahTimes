@@ -17,7 +17,8 @@ data class GeneralItem(
     val desc: String,
     val key: String,
     val default: String,
-    val options: Array<String>
+    val options: Array<String>,
+    val values: Array<String>
 ) : AbstractBindingItem<GeneralItemBinding>() {
 
     override val type: Int = R.id.general_item_main
@@ -35,12 +36,11 @@ data class GeneralItem(
             builder.setSingleChoiceItems(
                 options.map { it }.toTypedArray<CharSequence>(),
                 0
-            ) { dialog, i ->
-                dialog.dismiss()
-            }
+            ) { dialog, i -> }
             builder.setPositiveButton(R.string.ok) { dialog, which ->
                 val position = (dialog as AlertDialog).listView.checkedItemPosition
-                helper.putString(options[position], "placeholder")
+                helper.putString(key, values[position])
+                dialog.dismiss()
             }
 
             val dialog = builder.create()
@@ -55,7 +55,8 @@ data class GeneralItem(
         return GeneralItemBinding.inflate(inflater, parent, false)
     }
 
-    fun getValue(): String {
-        return helper.getString(key) ?: default
+    fun getPosition(): Int {
+        val value = helper.getString(key) ?: default
+        return values.indexOf(value)
     }
 }

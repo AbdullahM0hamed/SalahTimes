@@ -1,5 +1,5 @@
 <resources>
-<string-array name="calculationMethods">
+<string-array name="calculation_methods">
     <item>@string/muslim_world_league</item>
     <item>@string/egypt</item>
     <item>@string/karachi</item>
@@ -10,7 +10,7 @@
     <item>@string/singapore</item>
     <item>@string/north_america</item>
 </string-array>
-<string-array name="calculationMethodValues">
+<string-array name="calculation_method_values">
     <item>muslim_world_league</item>
     <item>egypt</item>
     <item>karachi</item>
@@ -25,19 +25,22 @@
     <item>@string/shafi</item>
     <item>@string/hanafi</item>
 </string-array>
-<string-array name="madaahibValues">
+<string-array name="madaahib_values">
     <item>shafi</item>
     <item>hanafi</item>
 </string-array>
-<string-array name="timeFormats">
+<string-array name="time_formats">
     <item>@string/military_time</item>
     <item>@string/am_pm_time</item>
 </string-array>
-<string-array name="timeFormatValues">
+<string-array name="time_format_values">
     <item>24_hour_time</item>
     <item>12_hour_time</item>
 </string-array>
 <string-array name="languages">
     <item>English</item>
+</string-array>
+<string-array name"language_values>
+    <item>english</string>
 </string-array>
 </resources>

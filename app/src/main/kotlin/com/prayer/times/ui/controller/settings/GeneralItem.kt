@@ -17,7 +17,7 @@ data class GeneralItem(
     val desc: String,
     val key: String,
     val default: String,
-    val options: Array<CharSequence>
+    val options: Array<String>
 ) : AbstractBindingItem<GeneralItemBinding>() {
 
     override val type: Int = R.id.general_item_main
@@ -34,7 +34,7 @@ data class GeneralItem(
             builder.setTitle(name)
             builder.setMessage(desc)
             builder.setSingleChoiceItems(
-                options,
+                options.map { it }.toTypedArray(),
                 options.indexOf(getValue()).let { if (it == -1) default else it }
             ) { dialog, i ->
                 dialog.dismiss()

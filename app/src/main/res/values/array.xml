@@ -40,7 +40,7 @@
 <string-array name="languages">
     <item>English</item>
 </string-array>
-<string-array name="language_values>
-    <item>english</string>
+<string-array name="language_values">
+    <item>english</item>
 </string-array>
 </resources>

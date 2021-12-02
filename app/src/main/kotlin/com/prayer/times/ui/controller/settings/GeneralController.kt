@@ -16,7 +16,7 @@ class GeneralController : SettingsController() {
                 resources!!.getString(R.string.language_title),
                 resources!!.getString(R.string.language_summary),
                 "language",
-                resources!!.getString(R.string.language_default),
+                "english",
                 resources!!.getStringArray(R.array.languages),
                 resources!!.getStringArray(R.array.language_values)
             ),
@@ -25,7 +25,7 @@ class GeneralController : SettingsController() {
                 resources!!.getString(R.string.calculation_method),
                 resources!!.getString(R.string.calculation_summary),
                 "calculation_method",
-                resources!!.getString(R.string.moonsighting),
+                "moonsighting",
                 resources!!.getStringArray(R.array.calculation_methods),
                 resources!!.getStringArray(R.array.calculation_method_values)
             ),
@@ -34,7 +34,7 @@ class GeneralController : SettingsController() {
                 resources!!.getString(R.string.madhab),
                 resources!!.getString(R.string.madhab_summary),
                 "madhab",
-                resources!!.getString(R.string.shafi),
+                "shafi",
                 resources!!.getStringArray(R.array.madaahib),
                 resources!!.getStringArray(R.array.madaahib_values)
             ),
@@ -43,7 +43,7 @@ class GeneralController : SettingsController() {
                 resources!!.getString(R.string.time_format),
                 resources!!.getString(R.string.time_format_summary),
                 "time_format",
-                resources!!.getString(R.string.military_time),
+                "24_hour_time",
                 resources!!.getStringArray(R.array.time_formats),
                 resources!!.getStringArray(R.array.time_format_values)
             )

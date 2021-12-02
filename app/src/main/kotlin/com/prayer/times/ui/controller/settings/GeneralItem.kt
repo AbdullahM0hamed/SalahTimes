@@ -29,7 +29,7 @@ data class GeneralItem(
         payloads: List<Any>
     ) {
         binding.title.text = name
-        binding.summary.text = helper.getString(key) ?: default
+        binding.summary.text = getSummaryText(helper.getString(key) ?: default)
         binding.root.setOnClickListener {
             val builder = AlertDialog.Builder(context)
             builder.setTitle(desc)
@@ -58,5 +58,9 @@ data class GeneralItem(
     fun getPosition(): Int {
         val value = helper.getString(key) ?: default
         return values.indexOf(value)
+    }
+
+    fun getSummaryText(value: String): String {
+        return values[options.indexOf(value)]
     }
 }

@@ -61,7 +61,6 @@ data class GeneralItem(
     }
 
     fun getSummaryText(value: String): String {
-        return value
-        //return values[options.indexOf(value)]
+        return values[options.indexOf(value)]
     }
 }

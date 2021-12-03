@@ -7,7 +7,7 @@ class PreferencesHelper(val context: Context) {
 
     private val prefs = PreferenceManager.getDefaultSharedPreferences(context)
 
-    fun getString(key: String) = prefs.getString(key, "")
+    fun getString(key: String) = prefs.getString(key, null)
 
     fun putString(key: String, value: String) {
         with(prefs.edit()) {

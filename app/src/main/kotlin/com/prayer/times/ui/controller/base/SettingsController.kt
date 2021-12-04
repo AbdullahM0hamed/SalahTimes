@@ -63,15 +63,15 @@ abstract class SettingsController : BaseController<PreferencesLayoutBinding>() {
         binding.recycler.adapter = adapter
     }
 
-    open fun hideBottomNav(): Boolean = true
+    open fun removeBottomNav(): Boolean = true
 
     override fun onAttach(view: View) {
-        if (!hideBottomNav()) return
+        if (!removeBottomNav()) return
         hideBottomNav()
     }
 
     override fun onDetach(view: View) {
-        if (!hideBottomNav()) return
+        if (!removeBottomNav()) return
         (activity as? MainActivity)?.binding?.bottomNavigation?.visibility = View.VISIBLE
     }
 

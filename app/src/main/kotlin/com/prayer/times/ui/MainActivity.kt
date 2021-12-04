@@ -39,7 +39,7 @@ class MainActivity :
     LocationListener,
     PermissionListener {
 
-    private lateinit var binding: MainActivityBinding
+    public lateinit var binding: MainActivityBinding
     private lateinit var router: Router
 
     override fun onCreate(savedInstance: Bundle?) {

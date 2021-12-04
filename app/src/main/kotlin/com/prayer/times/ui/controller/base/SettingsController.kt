@@ -13,6 +13,7 @@ import com.mikepenz.fastadapter.adapters.ItemAdapter.Companion.items
 import com.mikepenz.fastadapter.binding.AbstractBindingItem
 import com.prayer.times.R
 import com.prayer.times.databinding.PreferencesLayoutBinding
+import com.prayer.times.ui.MainActivity
 import com.prayer.times.ui.controller.base.BaseController
 
 abstract class SettingsController : BaseController<PreferencesLayoutBinding>() {
@@ -60,5 +61,21 @@ abstract class SettingsController : BaseController<PreferencesLayoutBinding>() {
         adapter = FastAdapter.with(list.reversed())
         binding.recycler.layoutManager = LinearLayoutManager(view.context)
         binding.recycler.adapter = adapter
+    }
+
+    open fun hideBottomNav(): Boolean = true
+
+    override fun onAttach(view: View) {
+        if (!hideBottomNav()) return
+        hideBottomNav()
+    }
+
+    override fun onDetach(view: View) {
+        if (!hideBottomNav()) return
+        (activity as? MainActivity)?.binding?.bottomNavigation?.visibility = View.VISIBLE
+    }
+
+    fun hideBottomNav() {
+        (activity as? MainActivity)?.binding?.bottomNavigation?.visibility = View.GONE
     }
 }

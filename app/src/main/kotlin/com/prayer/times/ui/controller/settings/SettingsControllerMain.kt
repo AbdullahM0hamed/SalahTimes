@@ -9,6 +9,7 @@ class SettingsControllerMain : SettingsController() {
 
     override fun hasHeader() = true
     override fun hasActionBar() = false
+    override fun hideBottomNav() = false
     override fun getSettingsList() = listOf(
         SettingsItemMain(
             resources!!.getString(R.string.settings_general),

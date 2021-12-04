@@ -89,7 +89,7 @@ class TimesController : BaseController<TimesLayoutBinding>() {
         val nextPrayerText = (activity as Context).getString(R.string.next_prayer, timeFormatter.format(calculator.getNextPrayer().time))
         binding.nextPrayer.text = nextPrayerText
 
-        val times = calculator.getPrayerTimes(state?.date)
+        val times = calculator.getPrayerTimes(state.date)
 
         val timeBindings = listOf(binding.fajrStart, binding.sunriseStart, binding.dhuhrStart, binding.asrStart, binding.maghribStart, binding.ishaStart, binding.midnightStart)
         val timeDates = listOf(times.fajr, times.sunrise, times.dhuhr, times.asr, times.maghrib, times.isha, SunnahTimes(times).middleOfTheNight)

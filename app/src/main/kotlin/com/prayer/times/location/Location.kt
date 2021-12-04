@@ -32,14 +32,13 @@ class Location {
             if (location == null) {
                 manager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0f, activity as LocationListener)
             } else {
-                saveLocation(activity as Context, location?.latitude, location?.longitude)
+                saveLocation(activity as Context, location.latitude, location.longitude)
             }
         }
 
         fun getManualLocation(activity: MainActivity) {
             val intent = VanillaPlacePicker.Builder(activity as Context)
                     .with(PickerType.MAP_WITH_AUTO_COMPLETE)
-                    .setCountry((activity as Context).getResources().getConfiguration().locale.getCountry())
                     .enableShowMapAfterSearchResult(true)
                     .build()
 

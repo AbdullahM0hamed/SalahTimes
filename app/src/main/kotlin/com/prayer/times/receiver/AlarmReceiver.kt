@@ -29,7 +29,7 @@ class AlarmReceiver : BroadcastReceiver() {
         }
     }
 
-    fun getName(context: Context, name: String) = when (name) {
+    fun getName(context: Context, name: String?) = when (name) {
         "FAJR" -> context.getString(R.string.fajr)
         "DHUHR" -> context.getString(R.string.dhuhr)
         "ASR" -> context.getString(R.string.asr)

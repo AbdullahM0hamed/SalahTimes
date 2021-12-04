@@ -36,8 +36,8 @@ data class GeneralItem(
             builder.setSingleChoiceItems(
                 options.map { it }.toTypedArray<CharSequence>(),
                 getPosition()
-            ) { dialog, i -> }
-            builder.setPositiveButton(R.string.ok) { dialog, which ->
+            ) { _, _ -> }
+            builder.setPositiveButton(R.string.ok) { dialog, _ ->
                 val position = (dialog as AlertDialog).listView.checkedItemPosition
                 helper.putString(key, values[position])
                 dialog.dismiss()

@@ -40,6 +40,7 @@ data class GeneralItem(
             builder.setPositiveButton(R.string.ok) { dialog, _ ->
                 val position = (dialog as AlertDialog).listView.checkedItemPosition
                 helper.putString(key, values[position])
+                binding.summary.text = getSummaryText(helper.getString(key) ?: default)
                 dialog.dismiss()
             }
 

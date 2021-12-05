@@ -1,6 +1,7 @@
 package com.prayer.times.ui.controller.settings
 
 import android.content.Context
+import com.prayer.times.Constants
 import com.prayer.times.R
 import com.prayer.times.ui.controller.base.SettingsController
 
@@ -15,8 +16,8 @@ class GeneralController : SettingsController() {
                 context,
                 resources!!.getString(R.string.language_title),
                 resources!!.getString(R.string.language_summary),
-                "language",
-                "english",
+                Constants.LANGUAGE_KEY,
+                Constants.LANGUAGE_DEFAULT,
                 resources!!.getStringArray(R.array.languages),
                 resources!!.getStringArray(R.array.language_values)
             ),
@@ -24,8 +25,8 @@ class GeneralController : SettingsController() {
                 context,
                 resources!!.getString(R.string.calculation_method),
                 resources!!.getString(R.string.calculation_summary),
-                "calculation_method",
-                "moonsighting",
+                Constants.CALCULATION_KEY,
+                Constants.CALCULATION_DEFAULT,
                 resources!!.getStringArray(R.array.calculation_methods),
                 resources!!.getStringArray(R.array.calculation_method_values)
             ),
@@ -33,8 +34,8 @@ class GeneralController : SettingsController() {
                 context,
                 resources!!.getString(R.string.madhab),
                 resources!!.getString(R.string.madhab_summary),
-                "madhab",
-                "shafi",
+                Constants.NADHAB_KEY,
+                Constants.MADHAB_DEFAULT,
                 resources!!.getStringArray(R.array.madaahib),
                 resources!!.getStringArray(R.array.madaahib_values)
             ),
@@ -42,8 +43,8 @@ class GeneralController : SettingsController() {
                 context,
                 resources!!.getString(R.string.time_format),
                 resources!!.getString(R.string.time_format_summary),
-                "time_format",
-                "24_hour_time",
+                Constants.TIME_FORMAT_KEY,
+                Constants.TIME_FORMAT_DEFAULT,
                 resources!!.getStringArray(R.array.time_formats),
                 resources!!.getStringArray(R.array.time_format_values)
             )

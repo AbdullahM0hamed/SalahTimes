@@ -34,7 +34,7 @@ class GeneralController : SettingsController() {
                 context,
                 resources!!.getString(R.string.madhab),
                 resources!!.getString(R.string.madhab_summary),
-                Constants.NADHAB_KEY,
+                Constants.MADHAB_KEY,
                 Constants.MADHAB_DEFAULT,
                 resources!!.getStringArray(R.array.madaahib),
                 resources!!.getStringArray(R.array.madaahib_values)

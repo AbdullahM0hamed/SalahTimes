@@ -77,10 +77,10 @@ class Calculation(
     fun getQiblahDirection() = QiblaUtil.calculateQiblaDirection(coordinates).toFloat()
 
     fun getCalculationMethod(): CalculationMethod {
-        val calcArray = context.resources.getStringArray(R.array.calculation_methods_values)
+        val calcArray = context.resources.getStringArray(R.array.calculation_method_values)
         val value = helper.getString(Constants.CALCULATION_KEY) ?: Constants.CALCULATION_DEFAULT
 
-        return when (calcArray.indexOf(calculation_methods_values)) {
+        return when (calcArray.indexOf(value)) {
             0 -> CalculationMethod.MUSLIM_WORLD_LEAGUE
             1 -> CalculationMethod.EGYPTIAN
             2 -> CalculationMethod.KARACHI
@@ -96,7 +96,7 @@ class Calculation(
     }
 
     fun getMadhab(): Madhab {
-        return if (helpers.getString(Constants.MADHAB_KEY) ?: Constants.MADHAB_DEFAULT) {
+        return if ((helper.getString(Constants.MADHAB_KEY) ?: Constants.MADHAB_DEFAULT) == Constants.MADHAB_DEFAULT) {
             Madhab.SHAFI
         } else {
             Madhab.HANAFI

@@ -7,10 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import com.batoulapps.adhan.SunnahTimes
 import com.github.msarhan.ummalqura.calendar.UmmalquraCalendar
+import com.prayer.times.Constants
 import com.prayer.times.R
 import com.prayer.times.calculation.Calculation
 import com.prayer.times.databinding.TimesLayoutBinding
 import com.prayer.times.location.Location
+import com.prayer.times.preference.PreferencesHelper
 import com.prayer.times.ui.MainActivity
 import com.prayer.times.ui.action.AddToDate
 import com.prayer.times.ui.action.UpdateTimes
@@ -26,7 +28,6 @@ class TimesController : BaseController<TimesLayoutBinding>() {
 
     private lateinit var storeSubscription: StoreSubscription
     private val formatter = SimpleDateFormat("EEEE, dd MMMM yyyy")
-    private val timeFormatter = SimpleDateFormat("HH:mm")
 
     override fun onActivityResumed(activity: Activity) {
         if ((activity as MainActivity).isLocationStored()) {
@@ -86,7 +87,7 @@ class TimesController : BaseController<TimesLayoutBinding>() {
         binding.date.text = formattedDate
 
         val calculator = Calculation(activity as Context)
-        val nextPrayerText = (activity as Context).getString(R.string.next_prayer, timeFormatter.format(calculator.getNextPrayer().time))
+        val nextPrayerText = (activity as Context).getString(R.string.next_prayer, getTimeFormat().format(calculator.getNextPrayer().time))
         binding.nextPrayer.text = nextPrayerText
 
         val times = calculator.getPrayerTimes(state.date)
@@ -95,7 +96,18 @@ class TimesController : BaseController<TimesLayoutBinding>() {
         val timeDates = listOf(times.fajr, times.sunrise, times.dhuhr, times.asr, times.maghrib, times.isha, SunnahTimes(times).middleOfTheNight)
 
         timeBindings.zip(timeDates) { view, time ->
-            view.text = timeFormatter.format(time)
+            view.text = getTimeFormat().format(time)
         }
+    }
+
+    fun getTimeFormat(): String {
+        val helper = PreferencesHelper(activity as Context)
+        val format = if (helper.getString(Constants.TIME_FORMAT_KEY) ?: Constants.TIME_FORMAT_DEFAULT == Constants.TIME_FORMAT_DEFAULT) {
+            "HH:mm"
+        } else {
+            "hh:mm a"
+        }
+
+        return SimpleDateFormat(format)
     }
 }

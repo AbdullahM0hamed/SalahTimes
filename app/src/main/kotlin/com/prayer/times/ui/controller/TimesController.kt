@@ -90,7 +90,7 @@ class TimesController : BaseController<TimesLayoutBinding>() {
         binding.date.text = formattedDate
 
         val calculator = Calculation(activity as Context)
-        val nextPrayerText = formatCase((activity as Context).getString(R.string.next_prayer, getTimeFormat().format(calculator.getNextPrayer().time)))
+        val nextPrayerText = (activity as Context).getString(R.string.next_prayer, formatCase(getTimeFormat().format(calculator.getNextPrayer().time)))
         binding.nextPrayer.text = nextPrayerText
 
         val times = calculator.getPrayerTimes(state.date)

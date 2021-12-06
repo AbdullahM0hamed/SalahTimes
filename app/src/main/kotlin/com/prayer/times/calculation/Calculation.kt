@@ -11,6 +11,7 @@ import com.batoulapps.adhan.PrayerTimes
 import com.batoulapps.adhan.data.DateComponents
 import com.batoulapps.adhan.internal.QiblaUtil
 import com.prayer.times.Constants
+import com.prayer.times.R
 import com.prayer.times.preference.PreferencesHelper
 import com.prayer.times.receiver.AlarmReceiver
 import com.prayer.times.ui.MainActivity
@@ -34,7 +35,7 @@ class Calculation(
     fun getPrayerTimes(day: Date?): PrayerTimes {
         val date = DateComponents.from(day)
 
-        val params = CalculationMethod.NORTH_AMERICA.getParameters()
+        val params = getCalculationMethod().getParameters()
         params.madhab = Madhab.SHAFI
 
         return PrayerTimes(coordinates, date, params)
@@ -74,4 +75,31 @@ class Calculation(
     }
 
     fun getQiblahDirection() = QiblaUtil.calculateQiblaDirection(coordinates).toFloat()
+
+    fun getCalculationMethod(): CalculationMethod {
+        val calcArray = context.resources.getStringArray(R.array.calculation_methods_values)
+        val value = helper.getString(Constants.CALCULATION_KEY) ?: Constants.CALCULATION_DEFAULT
+
+        return when (calcArray.indexOf(calculation_methods_values)) {
+            0 -> CalculationMethod.MUSLIM_WORLD_LEAGUE
+            1 -> CalculationMethod.EGYPTIAN
+            2 -> CalculationMethod.KARACHI
+            3 -> CalculationMethod.UMM_AL_QURA
+            4 -> CalculationMethod.DUBAI
+            5 -> CalculationMethod.QATAR
+            6 -> CalculationMethod.KUWAIT
+            7 -> CalculationMethod.MOON_SIGHTING_COMMITTEE
+            8 -> CalculationMethod.SINGAPORE
+            9 -> CalculationMethod.NORTH_AMERICA
+            else -> CalculationMethod.MOON_SIGHTING_COMMITTEE
+        }
+    }
+
+    fun getMadhab(): Madhab {
+        return if (helpers.getString(Constants.MADHAB_KEY) ?: Constants.MADHAB_DEFAULT) {
+            Madhab.SHAFI
+        } else {
+            Madhab.HANAFI
+        }
+    }
 }

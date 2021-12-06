@@ -6,6 +6,7 @@
     <item>@string/makkah</item>
     <item>@string/dubai</item>
     <item>@string/qatar</item>
+    <item>@string/kuwait</item>
     <item>@string/moonsighting</item>
     <item>@string/singapore</item>
     <item>@string/north_america</item>
@@ -17,6 +18,7 @@
     <item>makkah</item>
     <item>dubai</item>
     <item>qatar</item>
+    <item>kuwait</item>
     <item>moonsighting</item>
     <item>singapore</item>
     <item>north_america</item>

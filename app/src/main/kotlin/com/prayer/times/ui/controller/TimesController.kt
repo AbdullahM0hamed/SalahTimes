@@ -82,6 +82,7 @@ class TimesController : BaseController<TimesLayoutBinding>() {
     }
 
     fun newState(state: SalahTimesState) {
+        helper = PreferencesHelper(activity as Context)
         val formattedDate = formatter.format(state.date)
         val hijriDate = getHijriDate(state.date)
 

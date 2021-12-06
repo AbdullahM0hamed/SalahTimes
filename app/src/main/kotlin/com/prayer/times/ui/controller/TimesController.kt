@@ -27,6 +27,7 @@ import java.util.Date
 class TimesController : BaseController<TimesLayoutBinding>() {
 
     private lateinit var storeSubscription: StoreSubscription
+    private lateinit var helper: PreferencesHelper
     private val formatter = SimpleDateFormat("EEEE, dd MMMM yyyy")
 
     override fun onActivityResumed(activity: Activity) {
@@ -51,6 +52,7 @@ class TimesController : BaseController<TimesLayoutBinding>() {
             mainStore.dispatch(UpdateTimes())
         }
 
+        helper = PreferencesHelper(activity as Context)
         binding.dayBefore.setOnClickListener {
             mainStore.dispatch(AddToDate(-1))
         }
@@ -100,7 +102,6 @@ class TimesController : BaseController<TimesLayoutBinding>() {
         }
     }
 
-    val helper = PreferencesHelper(activity as Context)
 
     fun getTimeFormat(): SimpleDateFormat {
         var format = if (getTimePref() == Constants.TIME_FORMAT_DEFAULT) {

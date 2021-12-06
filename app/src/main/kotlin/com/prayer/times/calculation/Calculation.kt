@@ -36,7 +36,7 @@ class Calculation(
         val date = DateComponents.from(day)
 
         val params = getCalculationMethod().getParameters()
-        params.madhab = Madhab.SHAFI
+        params.madhab = getCalculationMethod()
 
         return PrayerTimes(coordinates, date, params)
     }

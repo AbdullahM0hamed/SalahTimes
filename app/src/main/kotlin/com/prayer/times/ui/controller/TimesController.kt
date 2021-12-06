@@ -100,8 +100,9 @@ class TimesController : BaseController<TimesLayoutBinding>() {
         }
     }
 
+    val helper = PreferencesHelper(activity as Context)
+
     fun getTimeFormat(): SimpleDateFormat {
-        val helper = PreferencesHelper(activity as Context)
         var format = if (getTimePref() == Constants.TIME_FORMAT_DEFAULT) {
             "HH:mm"
         } else {

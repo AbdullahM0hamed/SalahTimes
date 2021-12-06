@@ -87,7 +87,7 @@ class TimesController : BaseController<TimesLayoutBinding>() {
         binding.date.text = formattedDate
 
         val calculator = Calculation(activity as Context)
-        val nextPrayerText = (activity as Context).getString(R.string.next_prayer, getTimeFormat().format(calculator.getNextPrayer().time))
+        val nextPrayerText = formatCase((activity as Context).getString(R.string.next_prayer, getTimeFormat().format(calculator.getNextPrayer().time)))
         binding.nextPrayer.text = nextPrayerText
 
         val times = calculator.getPrayerTimes(state.date)
@@ -96,25 +96,29 @@ class TimesController : BaseController<TimesLayoutBinding>() {
         val timeDates = listOf(times.fajr, times.sunrise, times.dhuhr, times.asr, times.maghrib, times.isha, SunnahTimes(times).middleOfTheNight)
 
         timeBindings.zip(timeDates) { view, time ->
-            view.text = getTimeFormat().format(time)
+            view.text = formatCase(getTimeFormat().format(time))
         }
     }
 
     fun getTimeFormat(): SimpleDateFormat {
         val helper = PreferencesHelper(activity as Context)
-        val value = helper.getString(Constants.TIME_FORMAT_KEY) ?: Constants.TIME_FORMAT_DEFAULT
-        var format = if (value == Constants.TIME_FORMAT_DEFAULT) {
+        var format = if (getTimePref() == Constants.TIME_FORMAT_DEFAULT) {
             "HH:mm"
         } else {
             "hh:mm a"
         }
 
-        if (value == resources!!.getStringArray(R.array.time_format_values)[2]) {
-            format = format.toUpperCase()
-        } else {
-            format = format.toLowerCase()
-        }
-
         return SimpleDateFormat(format)
     }
+
+    fun formatCase(text: String): String {
+        val timeArray = resources!!.getStringArray(R.array.time_format_values)
+        return if (getTimePref() == timeArray[2]) {
+            text.toUpperCase()
+        } else {
+            text.toLowerCase()
+        }
+    }
+
+    fun getTimePref() = helper.getString(Constants.TIME_FORMAT_KEY) ?: Constants.TIME_FORMAT_DEFAULT
 }

@@ -110,9 +110,9 @@ class TimesController : BaseController<TimesLayoutBinding>() {
         }
 
         if (value == resources!!.getStringArray(R.array.time_format_values)[2]) {
-            format = format.uppercase()
+            format = format.toUpperCase()
         } else {
-            format = format.lowercase()
+            format = format.toLowerCase()
         }
 
         return SimpleDateFormat(format)

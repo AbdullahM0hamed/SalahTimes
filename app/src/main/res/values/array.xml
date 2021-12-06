@@ -34,10 +34,12 @@
 <string-array name="time_formats">
     <item>@string/military_time</item>
     <item>@string/am_pm_time</item>
+    <item>@string/am_pm_time_upper</item>
 </string-array>
 <string-array name="time_format_values">
     <item>24_hour_time</item>
     <item>12_hour_time</item>
+    <item>12_hour_time_upper</item>
 </string-array>
 <string-array name="languages">
     <item>English</item>

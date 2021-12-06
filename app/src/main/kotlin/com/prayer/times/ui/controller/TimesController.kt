@@ -102,10 +102,17 @@ class TimesController : BaseController<TimesLayoutBinding>() {
 
     fun getTimeFormat(): SimpleDateFormat {
         val helper = PreferencesHelper(activity as Context)
-        val format = if (helper.getString(Constants.TIME_FORMAT_KEY) ?: Constants.TIME_FORMAT_DEFAULT == Constants.TIME_FORMAT_DEFAULT) {
+        val value = helper.getString(Constants.TIME_FORMAT_KEY) ?: Constants.TIME_FORMAT_DEFAULT
+        var format = if (value == Constants.TIME_FORMAT_DEFAULT) {
             "HH:mm"
         } else {
             "hh:mm a"
+        }
+
+        if (value == resources!!.getStringArray(R.array.time_format_values)[2]) {
+            format = format.uppercase()
+        } else {
+            format = format.lowercase()
         }
 
         return SimpleDateFormat(format)

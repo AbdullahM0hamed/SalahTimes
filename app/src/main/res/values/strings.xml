@@ -28,7 +28,8 @@
     <string name="shafi">Shafi\'i</string>
     <string name="hanafi">Hanafi</string>
     <string name="military_time">24 hour format</string>
-    <string name="am_pm_time">12 hour format</string>
+    <string name="am_pm_time">12 hour format (am/pm)</string>
+    <string name="am_pm_time_upper">12 hour format (AM/PM)</string>
     <string name="time_format">Time Format</string>
     <string name="time_format_summary">Select the format with which to display prayer times</string>
     <string name="prayer_heading">Prayer</string>

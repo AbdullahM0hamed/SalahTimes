@@ -1,5 +1,5 @@
 <div align="center">
-<img src="https://github.com/AbdullahM0hamed/SalahTimes/blob/main/app/src/main/res/drawable/splash_icon.png">
+<img src="https://github.com/AbdullahM0hamed/SalahTimes/raw/c17b8b6cd7764548a49fab6a80b6d25cb92295c6/app/src/main/res/drawable-xxhdpi/ic_launcher.png">
 <br>
 <strong><i>An android app which helps a Muslim keep track of the times of Salah</i></strong>
 </div>

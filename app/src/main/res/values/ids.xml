@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="settings_item_main" type="id" />
+    <item name="settings_header" type="id" />
+    <item name="general_item_main" type="id" />
+</resources>

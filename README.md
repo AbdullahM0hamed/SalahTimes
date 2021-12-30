@@ -5,15 +5,15 @@
 </div>
 
 ## Salah Times
-This is a simple android app intended to help Muslims keep track of the times of salah, whilst also being open-source so Muslims can feel comfortable letting this app use their location data.
+This is a simple android app intended to help Muslims keep track of the times of salah, whilst also being open-source so Muslims can feel comfortable letting this app use their location data. Everything is built entirely via Github [actions](https://github.com/AbdullahM0hamed/SalahTimes/actions).
 
 ## Planned Features - CheckList
 This app is not yet complete enough (in my opinion) for release. Here is a list of features that I want done, and whether or not they are complete.
 
 - [x] Calculate Salah Times
-  - [x] Make calculation method configurable
+  - [ ] Make calculation method configurable
   - [x] Calculate times for other days, so users can check ahead of time if they wish
-- [ ] Notify the user when it is time for Salah. This is the main feature I would like to fix before releasing the app
+- [x] Notify the user when it is time for Salah. 
 - [ ] - Have a functioning Qiblah compass
   - [x] - Provide a fallback for users who do not have the necessary sensors to allow for a working compass, using the sun as a reference. Unfortunately, I am one of these people and need help testing any code I will have to write for a functioning compass.
 - [ ] A widget for Salah Times
@@ -36,6 +36,10 @@ The following are the open-source libraries used in this prproject (bar anything
 
 - [Adhan Java](https://github.com/batoulapps/adhan-java)
 - [ummalqura-calendar](https://github.com/msarhan/ummalqura-calendar)
+- [reduxkotlin](https://github.com/reduxkotlin/redux-kotlin)
+- [Conductor](https://github.com/bluelinelabs/Conductor)
+- [Dexter](https://github.com/Karumi/Dexter)
+- [vanilla-place-picker](https://github.com/Mindinventory/vanilla-place-picker)
 
 ## Thanks
 

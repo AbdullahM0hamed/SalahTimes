@@ -1,15 +1,16 @@
 <resources>
     <string name="app_name">Salah Times</string>
-	<string name="action_settings">Settings</string>
-	<string name="fajr">Fajr</string>
-	<string name="sunrise">Sunrise</string>
-	<string name="dhuhr">Dhuhr</string>
-	<string name="asr">Asr</string>
-	<string name="maghrib">Maghrib</string>
+    <string name="action_settings">Settings</string>
+    <string name="fajr">Fajr</string>
+    <string name="sunrise">Sunrise</string>
+    <string name="dhuhr">Dhuhr</string>
+    <string name="asr">Asr</string>
+    <string name="maghrib">Maghrib</string>
     <string name="isha">Isha</string>
     <string name="salah_times">Salah Times</string>
     <string name="qiblah_string">Qiblah</string>
     <string name="settings_string">Settings</string>
+    <string name="language_summary">Select the language to display the app in</string>
     <string name="calculation_method">Calculation Method</string>
     <string name="calculation_summary">Select method to use for prayer time calculations</string>
     <string name="madhab">Madhab</string>
@@ -20,13 +21,15 @@
     <string name="makkah">Umm al-Qura University, Makkah</string>
     <string name="dubai">Dubai</string>
     <string name="qatar">Qatar</string>
+    <string name="kuwait">Kuwait</string>
     <string name="moonsighting">Moonsighting committee</string>
     <string name="singapore">Singapore</string>
     <string name="north_america">Islamic Society of North America (ISNA)</string>
     <string name="shafi">Shafi\'i</string>
     <string name="hanafi">Hanafi</string>
     <string name="military_time">24 hour format</string>
-    <string name="am_pm_time">12 hour format</string>
+    <string name="am_pm_time">12 hour format (am/pm)</string>
+    <string name="am_pm_time_upper">12 hour format (AM/PM)</string>
     <string name="time_format">Time Format</string>
     <string name="time_format_summary">Select the format with which to display prayer times</string>
     <string name="prayer_heading">Prayer</string>
@@ -36,4 +39,19 @@
     <string name="missing_sensors_title">Missing Sensors</string>
     <string name="missing_sensors_description">Your device is lacking the necessary sensors to allow your device to have a working compass app. As an alternative, you must align the marked direction with the sun as you see it in the sky, in order to determine the direction of the qiblah.</string>
     <string name="refresh">Refresh</string>
+    <string name="notification_adhan">Adhan</string>
+    <string name="notification_description">Adhan and pop up on screen</string>
+    <string name="midnight">Midnight</string>
+
+    <string name="settings_general">General</string>
+    <string name="settings_themes">Theme</string>
+    <string name="settings_relocate">Locate</string>
+    <string name="settings_about">About</string>
+
+    <string name="location_updated">Location updated!</string>
+
+    <string name="language_title">Language</string>
+    <string name="language_default">System default</string>
+
+    <string name="ok">OK</string>
 </resources>

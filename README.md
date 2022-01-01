@@ -11,7 +11,7 @@ This is a simple android app intended to help Muslims keep track of the times of
 This app is not yet complete enough (in my opinion) for release. Here is a list of features that I want done, and whether or not they are complete.
 
 - [x] Calculate Salah Times
-  - [ ] Make calculation method configurable
+  - [x] Make calculation method configurable
   - [x] Calculate times for other days, so users can check ahead of time if they wish
 - [x] Notify the user when it is time for Salah. 
 - [ ] - Have a functioning Qiblah compass

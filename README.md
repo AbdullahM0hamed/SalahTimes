@@ -26,7 +26,7 @@ The following screenshots showcase the app is it right now, and may change in th
 
 <img align="center" src="https://github.com/AbdullahM0hamed/SalahTimes/blob/main/screenshots/screenshot_splash.jpg">
 <img align="center" src="https://github.com/AbdullahM0hamed/SalahTimes/blob/main/screenshots/screenshot_prayer_times.jpg">
-<img align="center" src="https://github.com/AbdullahM0hamed/SalahTimes/blob/main/screenshots/screenshot_missing_sensors.jpg">
+<!-- <img align="center" src="https://github.com/AbdullahM0hamed/SalahTimes/blob/main/screenshots/screenshot_missing_sensors.jpg"> -->
 <img align="center" src="https://github.com/AbdullahM0hamed/SalahTimes/blob/main/screenshots/screenshot_solar_compass.jpg">
 <img align="center" src="https://github.com/AbdullahM0hamed/SalahTimes/blob/main/screenshots/screenshot_settings.jpg">
 

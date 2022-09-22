@@ -15,7 +15,7 @@ This app is not yet complete enough (in my opinion) for release. Here is a list 
   - [x] Calculate times for other days, so users can check ahead of time if they wish
 - [x] Notify the user when it is time for Salah. 
 - [ ] - Have a functioning Qiblah compass
-  - [x] - Provide a fallback for users who do not have the necessary sensors to allow for a working compass, using the sun as a reference. Unfortunately, I am one of these people and need help testing any code I will have to write for a functioning compass.
+  - [x] - Provide a fallback for users who do not have the necessary sensors to allow for a working compass, using the sun as a reference.
 - [ ] A widget for Salah Times
 - [ ] A widget that shows the Hijri date
 - [ ] A comprehensive theme engine (I'm an advocate of choice when it comes to app aesthetics)
